@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose');
 const bcrypt = require('bcrypt');
-const mongooseConnection = require('../db/mongoose');
+const mongooseDB = require('../db/mongoose');
 
 const schema = new Schema(
   {
@@ -40,4 +40,4 @@ schema.pre('save', async function (next) {
   }
 });
 
-module.exports = mongooseConnection.model('user', schema);
+module.exports = mongooseDB.model('user', schema);

@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { PORT } = require('./utils/config');
 const rootRoute = require('./routes');
-const mongooseConnection = require('./db/mongoose');
+const mongooseDB = require('./db/mongoose');
 const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
@@ -29,7 +29,7 @@ app.listen(PORT, () => {
 
   // Handle on exit
   process.on('SIGINT', async () => {
-    await mongooseConnection.close();
+    await mongooseDB.close();
 
     console.log('Server shutdown');
     process.exit(0);

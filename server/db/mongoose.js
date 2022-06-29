@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 const { DB_URL } = require('../utils/config');
 
-const mongooseConnection = mongoose.createConnection(DB_URL);
+const mongooseDB = mongoose.createConnection(DB_URL);
 
-mongooseConnection.on('connected', () => {
+mongooseDB.on('connected', () => {
   console.log('MongooseDB connected');
 });
 
-mongooseConnection.on('disconnected', () => {
+mongooseDB.on('disconnected', () => {
   console.log('MongooseDB disconnected');
 });
 
-mongooseConnection.on('error', (err) => {
+mongooseDB.on('error', (err) => {
   console.log('MongooseDB error::', JSON.stringify(err));
 });
 
-module.exports = mongooseConnection;
+module.exports = mongooseDB;
