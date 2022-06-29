@@ -2,12 +2,14 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
-const { PORT } = require('./utils/config');
+const config = require('./utils/config');
 const rootRoute = require('./routes');
-const mongooseDB = require('./db/mongoose');
+const mongoose = require('./db/mongoose');
+const redis = require('./db/redis');
 const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
+const PORT = config.port;
 
 // Middlewares
 app.use(cors());
@@ -29,7 +31,8 @@ app.listen(PORT, () => {
 
   // Handle on exit
   process.on('SIGINT', async () => {
-    await mongooseDB.close();
+    await mongoose.close();
+    await redis.disconnect();
 
     console.log('Server shutdown');
     process.exit(0);

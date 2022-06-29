@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose');
+const mongoose = require('../db/mongoose');
 const bcrypt = require('bcrypt');
-const mongooseDB = require('../db/mongoose');
 
 const schema = new Schema(
   {
@@ -28,6 +28,7 @@ const schema = new Schema(
   { versionKey: false }
 );
 
+// Auto hash password before save to database
 schema.pre('save', async function (next) {
   try {
     const salt = await bcrypt.genSalt();
@@ -40,4 +41,12 @@ schema.pre('save', async function (next) {
   }
 });
 
-module.exports = mongooseDB.model('user', schema);
+schema.methods.isValidPassword = async function (password) {
+  try {
+    return await bcrypt.compare(password, this.password);
+  } catch (error) {
+    return false;
+  }
+};
+
+module.exports = mongoose.model('user', schema);

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const { DB_URL } = require('../utils/config');
+const { databaseURL } = require('../utils/config');
 
-const mongooseDB = mongoose.createConnection(DB_URL);
+const mongooseDB = mongoose.createConnection(databaseURL);
 
 mongooseDB.on('connected', () => {
   console.log('MongooseDB connected');
