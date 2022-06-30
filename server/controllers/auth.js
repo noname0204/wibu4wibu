@@ -70,7 +70,7 @@ module.exports = {
     try {
       res.clearCookie('refresh_token');
       redis.del(req.tokenPayload.id, (error) => {
-        if (error) return next(new httpErrors.InternalServerError());
+        if (error) throw new httpErrors.InternalServerError();
         res.status(200).json({ message: 'Logout success' });
       });
     } catch (error) {
