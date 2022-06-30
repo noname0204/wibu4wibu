@@ -11,6 +11,10 @@
     @apply font-medium;
   }
 
+  &-semibold {
+    @apply font-semibold;
+  }
+
   &-bold {
     @apply font-bold;
   }
@@ -38,6 +42,10 @@
 
     &-6 {
       @apply text-4xl;
+    }
+
+    &-7 {
+      @apply text-5xl;
     }
   }
 }
