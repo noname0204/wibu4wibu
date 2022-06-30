@@ -8,7 +8,9 @@ const { signAccessToken, signRefreshToken } = require('../utils/jwt');
 module.exports = {
   async register(req, res, next) {
     try {
-      await registerValidation(req.body);
+      const { error } = registerValidation(req.body);
+      if (error) throw new httpErrors.BadRequest(error.message);
+
       const { username, avatarURL, password } = req.body;
 
       const isExist = await User.findOne({ username });
@@ -31,7 +33,9 @@ module.exports = {
   },
   async login(req, res, next) {
     try {
-      await loginValidation(req.body);
+      const { error } = loginValidation(req.body);
+      if (error) throw new httpErrors.BadRequest(error.details[0].message);
+
       const { username, password } = req.body;
 
       const user = await User.findOne({ username });

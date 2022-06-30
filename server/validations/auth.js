@@ -8,7 +8,7 @@ module.exports = {
       password: joi.string().min(3).required(),
     });
 
-    return schema.validateAsync(data);
+    return schema.validate(data);
   },
   loginValidation(data) {
     const schema = joi.object({
@@ -16,6 +16,6 @@ module.exports = {
       password: joi.string().min(3).required(),
     });
 
-    return schema.validateAsync(data);
+    return schema.validate(data);
   },
 };
