@@ -1,0 +1,43 @@
+.paragraph {
+  & {
+    @apply text-center text-lg text-inherit;
+  }
+
+  &-thin {
+    @apply font-thin;
+  }
+
+  &-medium {
+    @apply font-medium;
+  }
+
+  &-bold {
+    @apply font-bold;
+  }
+
+  &-size {
+    &-1 {
+      @apply text-base;
+    }
+
+    &-2 {
+      @apply text-lg;
+    }
+
+    &-3 {
+      @apply text-xl;
+    }
+
+    &-4 {
+      @apply text-2xl;
+    }
+
+    &-5 {
+      @apply text-3xl;
+    }
+
+    &-6 {
+      @apply text-4xl;
+    }
+  }
+}
