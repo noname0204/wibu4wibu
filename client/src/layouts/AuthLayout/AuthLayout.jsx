@@ -4,7 +4,7 @@ import bgImg from '~/assets/auth-background.svg';
 const AuthLayout = ({ children }) => {
   return (
     <div
-      className='flex h-screen w-screen items-center justify-center bg-cover bg-no-repeat'
+      className='inline-flex h-screen w-screen items-center justify-center bg-cover bg-no-repeat'
       style={{ backgroundImage: `url(${bgImg})` }}
     >
       {children}

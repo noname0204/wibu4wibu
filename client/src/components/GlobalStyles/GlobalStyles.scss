@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 #app-root {
-  @apply h-screen w-screen;
+  width: 100vw;
+  height: 100vh;
 }
 
 a {

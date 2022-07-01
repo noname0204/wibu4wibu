@@ -1,4 +1,4 @@
-import Form from '~/components/Form';
+import FadeInForm from '~/components/FadeInForm';
 import Input from '~/components/Input';
 import Divider from '~/components/Divider';
 import Paragraph from '~/components/Paragraph';
@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const Login = () => {
   return (
-    <Form width='27rem'>
+    <FadeInForm width='27rem'>
       <Paragraph variant='semibold' color='#011d33' size={6}>
         Login
       </Paragraph>
@@ -20,7 +20,7 @@ const Login = () => {
       <Paragraph>
         Don't have an account? <Link to='/register'>Register</Link>
       </Paragraph>
-    </Form>
+    </FadeInForm>
   );
 };
 

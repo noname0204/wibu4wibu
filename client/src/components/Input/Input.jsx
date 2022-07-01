@@ -7,7 +7,17 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 const cx = classNames.bind(classes);
 const Input = forwardRef(
-  ({ fullWidth = false, label, type = 'text', error = false, errorMessage }, ref) => {
+  (
+    {
+      fullWidth = false,
+      label,
+      type = 'text',
+      error = false,
+      errorMessage,
+      ...inputProps
+    },
+    ref
+  ) => {
     const [visible, setVisible] = useState(type !== 'password');
     const EyeIcon = useMemo(() => (visible ? AiFillEyeInvisible : AiFillEye), [visible]);
 
@@ -24,6 +34,7 @@ const Input = forwardRef(
             placeholder={`Enter ${label}`}
             type={visible ? 'text' : 'password'}
             ref={ref}
+            {...inputProps}
           />
           <When condition={type === 'password'}>
             <span className='absolute inset-y-0 right-4 inline-flex items-center'>

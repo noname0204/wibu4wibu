@@ -4,7 +4,9 @@
   }
 
   &-input {
-    @apply w-full rounded-lg p-3 text-lg shadow-sm outline-none ring-1;
+    width: 100%;
+    outline: none;
+    @apply rounded-lg p-3 text-lg shadow-sm ring-1;
 
     &:focus {
       @apply ring-2;
@@ -12,7 +14,7 @@
   }
 
   &-eye-icon {
-    @apply cursor-pointer;
+    cursor: pointer;
   }
 }
 

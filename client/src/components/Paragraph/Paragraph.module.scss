@@ -1,7 +1,7 @@
 .paragraph {
-  & {
-    @apply text-center text-lg text-inherit;
-  }
+  text-align: center;
+  color: inherit;
+  @apply text-center text-lg text-inherit;
 
   &-thin {
     @apply font-thin;

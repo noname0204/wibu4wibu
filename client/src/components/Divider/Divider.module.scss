@@ -1,13 +1,18 @@
 .divider {
-  @apply relative flex w-full items-center;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
 
   &::before,
   &::after {
     content: '';
-    @apply flex-grow border-t border-gray-400;
+    flex-grow: 1;
+    @apply border-t border-gray-400;
   }
 }
 
 .label {
-  @apply mx-4 flex-shrink text-gray-700;
+  flex-shrink: 1;
+  @apply mx-4 text-gray-700;
 }
