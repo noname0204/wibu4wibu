@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const Login = () => {
   return (
     <Form width='27rem'>
-      <Paragraph variant='semibold' color='#011d33' size={7}>
+      <Paragraph variant='semibold' color='#011d33' size={6}>
         Login
       </Paragraph>
       <Input label='Username' fullWidth />
