@@ -1,24 +1,20 @@
+import type { InputHTMLAttributes } from 'react';
 import { forwardRef, useState, useMemo } from 'react';
-import PropTypes from 'prop-types';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import classNames from 'classnames/bind';
 import classes from './Input.module.scss';
-import { When } from 'react-if';
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  fullWidth?: boolean;
+  label: string;
+  error?: boolean;
+  errorMessage?: string;
+}
 
 const cx = classNames.bind(classes);
-const Input = forwardRef(
-  (
-    {
-      fullWidth = false,
-      label,
-      type = 'text',
-      error = false,
-      errorMessage,
-      ...inputProps
-    },
-    ref
-  ) => {
-    const [visible, setVisible] = useState(type !== 'password');
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ fullWidth = false, label, error, errorMessage, type, ...inputProps }, ref) => {
+    const [visible, setVisible] = useState<boolean>(type !== 'password');
     const EyeIcon = useMemo(() => (visible ? AiFillEyeInvisible : AiFillEye), [visible]);
 
     const handleEyeClick = () => {
@@ -34,9 +30,10 @@ const Input = forwardRef(
             placeholder={`Enter ${label}`}
             type={visible ? 'text' : 'password'}
             ref={ref}
+            spellCheck={false}
             {...inputProps}
           />
-          <When condition={type === 'password'}>
+          {type === 'password' && (
             <span className='absolute inset-y-0 right-4 inline-flex items-center'>
               <EyeIcon
                 className={cx(
@@ -46,22 +43,14 @@ const Input = forwardRef(
                 onClick={handleEyeClick}
               />
             </span>
-          </When>
+          )}
         </div>
-        <When condition={error && errorMessage}>
+        {error && errorMessage && (
           <label className='pl-2 text-sm text-red-500'>{errorMessage}</label>
-        </When>
+        )}
       </div>
     );
   }
 );
-
-Input.propTypes = {
-  fullWidth: PropTypes.bool,
-  label: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['text', 'password']),
-  error: PropTypes.bool,
-  errorMessage: PropTypes.string,
-};
 
 export default Input;

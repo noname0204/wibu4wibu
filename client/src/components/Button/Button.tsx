@@ -1,33 +1,24 @@
-import PropTypes from 'prop-types';
+import type { FC, ButtonHTMLAttributes, MouseEventHandler } from 'react';
 import classNames from 'classnames/bind';
 import classes from './Button.module.scss';
-import { Link } from 'react-router-dom';
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  fullWidth?: boolean;
+}
 
 const cx = classNames.bind(classes);
-const Button = ({
-  to,
-  href,
+const Button: FC<ButtonProps> = ({
   fullWidth = false,
-  disabled = false,
+  disabled,
   className,
   onClick,
   children,
+  ...buttonProps
 }) => {
-  let Comp = 'button';
-  const props = {};
+  const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+    if (onClick) onClick(e);
 
-  if (to) {
-    props.to = to;
-    Comp = Link;
-  } else if (href) {
-    props.href = href;
-    Comp = 'a';
-  }
-
-  const handleClick = (e) => {
-    if (onClick) onClick();
-
-    const button = e.target;
+    const button = e.target as HTMLButtonElement;
     let posX = e.nativeEvent.offsetX;
     let posY = e.nativeEvent.offsetY;
 
@@ -49,7 +40,7 @@ const Button = ({
   };
 
   return (
-    <Comp
+    <button
       className={cx(
         {
           button: true,
@@ -60,21 +51,11 @@ const Button = ({
       )}
       disabled={disabled}
       onClick={handleClick}
-      {...props}
+      {...buttonProps}
     >
       {children}
-    </Comp>
+    </button>
   );
-};
-
-Button.propTypes = {
-  to: PropTypes.string,
-  href: PropTypes.string,
-  fullWidth: PropTypes.bool,
-  disabled: PropTypes.bool,
-  className: PropTypes.string,
-  onClick: PropTypes.func,
-  children: PropTypes.string,
 };
 
 export default Button;

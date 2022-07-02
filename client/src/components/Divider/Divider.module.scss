@@ -1,6 +1,6 @@
 .divider {
-  width: 100%;
   position: relative;
+  width: 100%;
   display: flex;
   align-items: center;
 
@@ -10,9 +10,9 @@
     flex-grow: 1;
     @apply border-t border-gray-400;
   }
-}
 
-.label {
-  flex-shrink: 1;
-  @apply mx-4 text-gray-700;
+  & .label {
+    flex-shrink: 1;
+    @apply mx-4 text-gray-700;
+  }
 }

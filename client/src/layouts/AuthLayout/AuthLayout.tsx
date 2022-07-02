@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
+import type { FC, PropsWithChildren } from 'react';
 import bgImg from '~/assets/auth-background.svg';
 
-const AuthLayout = ({ children }) => {
+const AuthLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <div
       className='inline-flex h-screen w-screen items-center justify-center bg-cover bg-no-repeat'
@@ -10,10 +10,6 @@ const AuthLayout = ({ children }) => {
       {children}
     </div>
   );
-};
-
-AuthLayout.propTypes = {
-  children: PropTypes.node,
 };
 
 export default AuthLayout;

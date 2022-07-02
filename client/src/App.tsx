@@ -1,7 +1,8 @@
+import type { FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import routes from '~/routes';
 
-const App = () => {
+const App: FC = () => {
   return (
     <Routes>
       {routes.map((route, index) => (
