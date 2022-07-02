@@ -9,7 +9,6 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const cx = classNames.bind(classes);
 const Button: FC<ButtonProps> = ({
   fullWidth = false,
-  disabled,
   className,
   onClick,
   children,
@@ -26,14 +25,18 @@ const Button: FC<ButtonProps> = ({
       'animationend',
       () => {
         button.classList.remove(cx('pulse'));
-        button.disabled = false;
       },
       { once: true }
     );
 
     if (!button.classList.contains(cx('pulse'))) {
-      button.style.setProperty('--x', posX + 'px');
-      button.style.setProperty('--y', posY + 'px');
+      if (posX && posY) {
+        button.style.setProperty('--x', posX + 'px');
+        button.style.setProperty('--y', posY + 'px');
+      } else {
+        button.style.setProperty('--x', '50%');
+        button.style.setProperty('--y', '50%');
+      }
     }
 
     button.classList.add(cx('pulse'));
@@ -41,15 +44,11 @@ const Button: FC<ButtonProps> = ({
 
   return (
     <button
-      className={cx(
-        {
-          button: true,
-          'w-full': fullWidth,
-          disabled: disabled,
-        },
-        className
-      )}
-      disabled={disabled}
+      className={cx(className, {
+        button: true,
+        'w-full': fullWidth,
+        disabled: buttonProps.disabled,
+      })}
       onClick={handleClick}
       {...buttonProps}
     >
