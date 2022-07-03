@@ -1,7 +1,7 @@
 import { createRoutes, Router } from './utils';
 
 // Layouts
-import AuthLayout from '~/layouts/AuthLayout/AuthLayout';
+import AuthLayout from '~/layouts/AuthLayout';
 
 // Pages
 import Error404 from '~/pages/404';

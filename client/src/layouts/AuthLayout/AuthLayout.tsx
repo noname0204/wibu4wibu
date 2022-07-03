@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren } from 'react';
-import bgImg from '~/assets/auth-background.svg';
+import bgImg from '~/assets/blobscene.svg';
 
 const AuthLayout: FC<PropsWithChildren> = ({ children }) => {
   return (

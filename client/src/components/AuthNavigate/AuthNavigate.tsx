@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAppSelector } from '~/hooks';
 
-const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
+const AuthNavigate: FC<PropsWithChildren> = ({ children }) => {
   const { currentUser } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -21,4 +21,4 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   return <>{children}</>;
 };
 
-export default AuthProvider;
+export default AuthNavigate;
