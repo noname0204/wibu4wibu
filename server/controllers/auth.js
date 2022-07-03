@@ -14,7 +14,7 @@ module.exports = {
       const { username, avatarURL, password } = req.body;
 
       const isExist = await User.findOne({ username });
-      if (isExist) throw new httpErrors.Conflict(`Account ${username} already exists`);
+      if (isExist) throw new httpErrors.Conflict(`Account "${username}" already exists`);
 
       const user = new User({
         username,
@@ -39,7 +39,7 @@ module.exports = {
       const { username, password } = req.body;
 
       const user = await User.findOne({ username });
-      if (!user) throw new httpErrors.NotFound(`Account ${username} does not exist`);
+      if (!user) throw new httpErrors.NotFound(`Account "${username}" does not exist`);
 
       const isValidPassword = await user.isValidPassword(password);
       if (!isValidPassword) throw httpErrors.Unauthorized('Wrong password');

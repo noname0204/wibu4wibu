@@ -1,13 +1,19 @@
 import type { FC } from 'react';
 import type { RegisterSchema } from '~/validations/auth';
+import type { Error } from '~/types/api';
 
-import { useDocumentTitle } from '~/hooks';
+import { useState } from 'react';
+import { useDocumentTitle, useAppSelector, useAppDispatch } from '~/hooks';
 import { useForm } from 'react-hook-form';
 import { registerResolver } from '~/validations/auth';
+
+import authFetch from '~/api/auth';
+import { loginFetching, loginSuccess, loginFail } from '~/store/reducers/user';
 
 import FadeIn from '~/components/FadeIn';
 import Form from '~/components/Form';
 import Paragraph from '~/components/Paragraph';
+import Alert from '~/components/Alert';
 import Input from '~/components/Input';
 import Button from '~/components/Button';
 import Divider from '~/components/Divider';
@@ -19,10 +25,22 @@ const Register: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterSchema>({ resolver: registerResolver });
+  const dispatch = useAppDispatch();
+  const { isFetching } = useAppSelector((state) => state.user);
+  const [error, setError] = useState<string>('');
   useDocumentTitle('Register');
 
-  const handleRegister = handleSubmit(({ confirmPassword, ...data }) => {
-    console.log(data);
+  const handleRegister = handleSubmit(async ({ confirmPassword, ...data }) => {
+    try {
+      dispatch(loginFetching());
+      const { data: user } = await authFetch.register(data);
+      dispatch(loginSuccess(user));
+    } catch (error) {
+      dispatch(loginFail());
+      const resError = error as Error;
+      const errorMessage = resError.response?.data.message as string;
+      setError(errorMessage);
+    }
   });
 
   return (
@@ -31,6 +49,16 @@ const Register: FC = () => {
         <Paragraph fontStyle='semibold' color='#011d33' size={6}>
           Register
         </Paragraph>
+        {error && (
+          <Alert
+            title='Error !!!'
+            variant='error'
+            closeButton
+            onCloseButtonClick={() => setError('')}
+          >
+            {error}
+          </Alert>
+        )}
         <Input
           label='Username'
           fullWidth
@@ -54,7 +82,7 @@ const Register: FC = () => {
           error={errors.confirmPassword !== undefined}
           errorMessage={errors.confirmPassword?.message}
         />
-        <Button className='mt-3' fullWidth>
+        <Button className='mt-3' fullWidth disabled={isFetching}>
           Register
         </Button>
         <Divider label='OR' />
