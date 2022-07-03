@@ -1,8 +1,8 @@
 # MyanimeworldZ - Theo dõi anime mọi lúc, mọi nơi
 
-> **Trạng thái:** Đang trong quá trình phát triển
+> **Trạng thái:** Đang trong quá trình phát triển **(DEVELOPMENT)**
 
-Website được viết bởi 1 thằng wibu fullstack developer dỏm cho phép bạn lưu lại, coi các bộ `anime`, `manga`, `lightnovel` yêu thích. Sau này có thể có trên **mobile**.
+Website được viết bởi 1 thằng wibu fullstack developer dỏm. Cho phép bạn lưu lại, coi các bộ `anime`, `manga`, `lightnovel` yêu thích. Sau này có thể có trên **mobile**.
 
 ---
 
