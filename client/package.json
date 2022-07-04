@@ -1,7 +1,5 @@
 {
-  "name": "client",
   "private": true,
-  "version": "0.0.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -11,11 +9,12 @@
   "dependencies": {
     "@hookform/resolvers": "^2.9.3",
     "@reduxjs/toolkit": "^1.8.3",
+    "@tippyjs/react": "^4.2.6",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
     "framer-motion": "^6.3.16",
-    "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
+    "react-avatar": "^5.0.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.33.1",
     "react-icons": "^4.4.0",

@@ -13,4 +13,8 @@ export interface FetchingResponseError {
   message: string;
 }
 
+export interface RefreshTokenResponse {
+  accessToken: string;
+}
+
 export type Error = AxiosError<FetchingResponseError>;

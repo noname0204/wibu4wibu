@@ -13,7 +13,7 @@ const routers: Router[] = [
   { path: '/', element: <Home /> },
   { path: '/login', element: <Login />, layout: AuthLayout },
   { path: '/register', element: <Register />, layout: AuthLayout },
-  { path: '*', element: <Error404 />, layout: AuthLayout },
+  { path: '*', element: <Error404 />, layout: null },
 ];
 
 export default createRoutes(routers);

@@ -4,11 +4,13 @@ import classes from './Button.module.scss';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean;
+  styleLess?: boolean;
 }
 
 const cx = classNames.bind(classes);
 const Button: FC<ButtonProps> = ({
   fullWidth = false,
+  styleLess = false,
   className,
   onClick,
   children,
@@ -17,9 +19,11 @@ const Button: FC<ButtonProps> = ({
   const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     if (onClick) onClick(e);
 
-    const button = e.target as HTMLButtonElement;
-    let posX = e.nativeEvent.offsetX;
-    let posY = e.nativeEvent.offsetY;
+    const target = e.target as HTMLElement;
+    const button = target.closest(`.${cx('button')}`) as HTMLButtonElement;
+    const rect = button.getBoundingClientRect();
+    let posX = Math.round(e.clientX - rect.left);
+    let posY = Math.round(e.clientY - rect.top);
 
     button.addEventListener(
       'animationend',
@@ -46,8 +50,10 @@ const Button: FC<ButtonProps> = ({
     <button
       className={cx(className, {
         button: true,
+        ripple: true,
+        'default-style': !styleLess,
         'w-full': fullWidth,
-        disabled: buttonProps.disabled,
+        disabled: buttonProps.disabled && !styleLess,
       })}
       onClick={handleClick}
       {...buttonProps}

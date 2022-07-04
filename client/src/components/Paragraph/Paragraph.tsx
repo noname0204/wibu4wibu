@@ -6,6 +6,7 @@ interface ParagraphProps extends PropsWithChildren {
   fontStyle?: 'thin' | 'medium' | 'semibold' | 'bold';
   size?: number;
   color?: string;
+  className?: string;
 }
 
 const cx = classNames.bind(classes);
@@ -13,15 +14,23 @@ const Paragraph: FC<ParagraphProps> = ({
   fontStyle = 'medium',
   size = 1,
   color,
+  className = '',
   children,
+  ...props
 }) => {
   return (
-    <div
-      className={cx('paragraph', `style-${fontStyle}`, `size-${size}`)}
+    <p
+      className={cx(
+        'paragraph',
+        `style-${fontStyle}`,
+        `size-${size <= 7 ? size : 7}`,
+        className
+      )}
       style={{ color }}
+      {...props}
     >
       {children}
-    </div>
+    </p>
   );
 };
 
