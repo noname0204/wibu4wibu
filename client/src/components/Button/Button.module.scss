@@ -2,40 +2,10 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-}
-
-.default-style {
   @apply rounded-lg bg-blue-600 p-4 text-white;
-}
-
-.ripple::before {
-  content: '';
-  position: absolute;
-  width: 120%;
-  top: var(--y);
-  left: var(--x);
-  z-index: 2;
-  transform: translate(-50%, -50%) scale(0);
-  opacity: 0.5;
-  @apply aspect-square rounded-full bg-white;
-}
-
-.pulse::before {
-  animation: pulse 350ms;
 }
 
 .disabled {
   cursor: not-allowed;
   @apply bg-blue-500;
-}
-
-@keyframes pulse {
-  0% {
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0.5;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0;
-  }
 }

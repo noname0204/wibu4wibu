@@ -1,0 +1,25 @@
+.wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  span {
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    width: 120%;
+    aspect-ratio: 1 / 1;
+    position: absolute;
+    opacity: 0.75;
+    animation-name: ripple;
+    @apply bg-white/50;
+  }
+
+  @keyframes ripple {
+    to {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+}

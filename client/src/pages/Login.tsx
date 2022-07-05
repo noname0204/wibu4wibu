@@ -10,7 +10,7 @@ import { loginResolver } from '~/validations/auth';
 import authFetch from '~/api/auth';
 import { loginFetching, loginSuccess, loginFail } from '~/store/reducers/user';
 
-import FadeIn from '~/components/FadeIn';
+import { FadeIn } from '~/components/Animations';
 import Form from '~/components/Form';
 import Paragraph from '~/components/Paragraph';
 import Alert from '~/components/Alert';

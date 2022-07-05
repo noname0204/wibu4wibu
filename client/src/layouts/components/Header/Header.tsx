@@ -1,16 +1,14 @@
 import type { FC } from 'react';
-import classNames from 'classnames/bind';
-import classes from './styles/Header.module.scss';
 import Paragraph from '~/components/Paragraph';
 import Search from './Search';
 import Avatar from './Avatar';
 import NotificationBell from './NotificationBell';
+import classes from './styles/Header.module.scss';
 
-const cx = classNames.bind(classes);
 const Header: FC = () => {
   return (
-    <header className={cx('wrapper')}>
-      <Paragraph size={5} className={cx('title')}>
+    <header className={classes.wrapper}>
+      <Paragraph size={5} className={classes.title}>
         MyanimeworldZ&nbsp;
         {/* &nbsp; dùng để đặt thêm khoảng cách ở cuối chữ để fix lỗi của font */}
       </Paragraph>

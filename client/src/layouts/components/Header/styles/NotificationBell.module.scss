@@ -1,17 +1,18 @@
 .wrapper {
   cursor: pointer;
   padding: 0.3rem;
+  position: relative;
   border-radius: 50%;
 
   &:hover {
-    @apply bg-gray-200;
+    @apply bg-gray-100;
   }
 
   &:hover > .icon {
-    @apply fill-gray-500/90;
+    @apply fill-gray-400/90;
   }
 }
 
 .icon {
-  @apply fill-gray-400;
+  @apply fill-gray-300;
 }

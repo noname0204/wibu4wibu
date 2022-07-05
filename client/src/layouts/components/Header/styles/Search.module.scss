@@ -5,20 +5,19 @@ $search-items-margin: 0.7rem;
   min-width: 27rem;
   height: 2.5rem;
   border: 2px solid;
-  display: flex;
   align-items: center;
   flex-direction: row-reverse;
   padding-left: $search-items-margin;
   border-radius: 50vw;
   transition: border-color 200ms;
-  @apply border-gray-300;
+  @apply hidden border-gray-300 lg:flex;
 
   & > * {
     margin-right: $search-items-margin;
   }
 
   &:focus-within {
-    @apply border-gray-400/90;
+    @apply border-gray-400/80;
   }
 }
 
@@ -42,6 +41,7 @@ $search-items-margin: 0.7rem;
   align-items: center;
   outline: none;
   border: none;
+  @apply text-gray-600;
 }
 
 .clear-btn {

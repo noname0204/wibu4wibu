@@ -1,10 +1,11 @@
 .wrapper {
   min-height: 50px;
   padding: 0.5rem 1rem;
-  border-bottom: 1px solid #00000016;
+  border-bottom: 1px solid;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @apply border-gray-300;
 }
 
 .title {
@@ -12,5 +13,5 @@
   line-height: 3rem !important;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  @apply font-pacifico bg-gradient-to-r from-blue-600 to-cyan-600;
+  @apply font-pacifico bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-600;
 }
