@@ -8,4 +8,4 @@ Website được viết bởi 1 thằng wibu fullstack developer dỏm. Cho phé
 
 ## Các công nghệ sử dụng
 - ***Backend:*** `nodejs`, `express`, `mongoose`, `ioredis`
-- ***Frontend:*** `vite`, `reactjs`, `redux-toolkit`, `redux-persist`, `tailwindcss`, `typescript`
+- ***Frontend:*** `vite`, `reactjs`, `redux-toolkit`, `scss - css module`, `tailwindcss`, `typescript`
