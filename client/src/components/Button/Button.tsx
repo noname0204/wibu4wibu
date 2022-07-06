@@ -20,9 +20,9 @@ const Button: FC<ButtonProps> = ({
   return (
     <button
       className={cx(className, {
-        button: true,
+        button: !styleLess,
         'w-full': fullWidth,
-        disabled: buttonProps.disabled,
+        disabled: buttonProps.disabled && !styleLess,
       })}
       onClick={onClick}
       {...buttonProps}

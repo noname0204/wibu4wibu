@@ -1,16 +1,15 @@
 import type { FC, PropsWithChildren } from 'react';
-import { Fragment } from 'react';
 import { Header, Navbar } from '../components';
 
 const DefaultLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <Fragment>
+    <div className='flex h-full flex-col gap-2'>
       <Header />
-      <div className='mt-2 flex gap-3'>
+      <div className='mx-3 flex h-full gap-3'>
         <Navbar />
-        {children}
+        <div className='w-full'>{children}</div>
       </div>
-    </Fragment>
+    </div>
   );
 };
 

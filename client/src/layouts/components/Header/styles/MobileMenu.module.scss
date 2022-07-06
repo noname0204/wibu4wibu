@@ -1,0 +1,19 @@
+.wrapper {
+  display: block;
+
+  @apply lg:hidden;
+}
+
+.button {
+  position: relative;
+  width: 50px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+
+  display: grid;
+  place-content: center;
+
+  &:hover {
+    @apply bg-gray-100;
+  }
+}

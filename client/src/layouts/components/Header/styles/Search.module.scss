@@ -10,7 +10,7 @@ $search-items-margin: 0.7rem;
   padding-left: $search-items-margin;
   border-radius: 50vw;
   transition: border-color 200ms;
-  @apply hidden border-gray-300 lg:flex;
+  @apply hidden border-gray-300 md:flex;
 
   & > * {
     margin-right: $search-items-margin;
@@ -28,10 +28,6 @@ $search-items-margin: 0.7rem;
 
   &:hover {
     @apply fill-slate-600;
-  }
-
-  .search-input:focus + & {
-    @apply fill-slate-500;
   }
 }
 

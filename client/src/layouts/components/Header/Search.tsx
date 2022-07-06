@@ -19,7 +19,7 @@ const Search: FC = () => {
         placeholder='Search anime, manga, lightnovel, ...'
         spellCheck={false}
       />
-      <BiSearchAlt2 size={20} className={cx('search-icon')} />
+      <BiSearchAlt2 size={20} className={cx('search-icon', value && '!fill-slate-600')} />
     </div>
   );
 };
