@@ -1,4 +1,4 @@
-# MyanimeworldZ - Theo dõi anime mọi lúc, mọi nơi
+# Wibu4Wibu - Theo dõi anime mọi lúc, mọi nơi
 
 > **Trạng thái:** Đang trong quá trình phát triển **(DEVELOPMENT)**
 
@@ -8,4 +8,4 @@ Website được viết bởi 1 thằng wibu fullstack developer dỏm. Cho phé
 
 ## Các công nghệ sử dụng
 - ***Backend:*** `nodejs`, `express`, `mongoose`, `ioredis`
-- ***Frontend:*** `vite`, `reactjs`, `redux-toolkit`, `scss - css module`, `tailwindcss`, `typescript`
+- ***Frontend:*** `vite`, `react`, `redux-toolkit`, `typescript`
