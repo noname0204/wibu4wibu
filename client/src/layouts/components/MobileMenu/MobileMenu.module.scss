@@ -1,10 +1,11 @@
-.wrapper {
+// Show button
+.show-btn-wrapper {
   display: block;
 
   @apply lg:hidden;
 }
 
-.button {
+.show-btn {
   position: relative;
   width: 50px;
   aspect-ratio: 1 / 1;

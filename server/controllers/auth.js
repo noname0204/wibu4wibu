@@ -26,7 +26,7 @@ module.exports = {
       const refreshToken = await signRefreshToken(newUser);
 
       setCookie(res, 'refresh_token', refreshToken);
-      res.status(200).json({ ...newUser, accessToken });
+      res.status(200).json({ ...newUser, access_token: accessToken });
     } catch (error) {
       next(error);
     }
@@ -49,7 +49,7 @@ module.exports = {
       const refreshToken = await signRefreshToken(user);
 
       setCookie(res, 'refresh_token', refreshToken);
-      res.status(200).json({ ...userPublicInfo, accessToken });
+      res.status(200).json({ ...userPublicInfo, access_token: accessToken });
     } catch (error) {
       next(error);
     }
@@ -61,7 +61,7 @@ module.exports = {
       const refreshToken = await signRefreshToken(payload);
 
       setCookie(res, 'refresh_token', refreshToken);
-      res.status(200).json({ accessToken });
+      res.status(200).json({ access_token: accessToken });
     } catch (error) {
       next(error);
     }

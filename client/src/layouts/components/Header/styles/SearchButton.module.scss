@@ -1,0 +1,24 @@
+.search-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  width: 36px;
+  aspect-ratio: 1 / 1;
+  padding: 0.5rem;
+  border-radius: 50%;
+
+  @apply md:hidden;
+
+  &:hover {
+    @apply bg-gray-100;
+  }
+
+  &:hover > .search-icon {
+    @apply fill-gray-400/90;
+  }
+}
+
+.search-icon {
+  @apply fill-gray-300;
+}

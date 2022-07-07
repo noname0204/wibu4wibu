@@ -19,7 +19,7 @@ const Button: FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      className={cx(className, {
+      className={cx('outline-none', className, {
         button: !styleLess,
         'w-full': fullWidth,
         disabled: buttonProps.disabled && !styleLess,
