@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 
 const useSetDocumentTitle = (title: string) => {
   useEffect(() => {
-    document.title = 'MyanimeworldZ - ' + title;
+    document.title = 'WibuForWibu - ' + title;
 
     return () => {
-      document.title = 'MyanimeworldZ - Theo dõi anime mọi lúc, mọi nơi';
+      document.title = 'WibuForWibu - Theo dõi anime mọi lúc, mọi nơi';
     };
   }, [title]);
 };

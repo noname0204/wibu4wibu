@@ -11,8 +11,7 @@ const Header: FC = () => {
   return (
     <header className={classes.wrapper}>
       <Paragraph size={5} className={classes.title}>
-        WibuForWibu&nbsp;
-        {/* &nbsp; dùng để đặt thêm khoảng cách ở cuối chữ để fix lỗi của font */}
+        WibuForWibu
       </Paragraph>
       <MobileMenuShowButton />
       <Search />

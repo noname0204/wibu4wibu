@@ -1,6 +1,6 @@
 import type { FC, MouseEventHandler } from 'react';
 
-import { useState } from 'react';
+import { useState, useEffect, createRef } from 'react';
 import { useDebouncedRippleCleanUp } from '~/hooks';
 import classes from './Ripple.module.scss';
 
@@ -13,12 +13,9 @@ interface RipplePosition {
   y: number;
 }
 
-/**
- * ! Warning: Make sure your wrapper have style "position: relative"
- */
-
 const Ripple: FC<RippleProps> = ({ duration = 500 }) => {
   const [rippleArray, setRippleArray] = useState<RipplePosition[]>([]);
+  const rippleRef = createRef<HTMLDivElement>();
   useDebouncedRippleCleanUp(rippleArray.length, duration, () => setRippleArray([]));
 
   const handleAddRipple: MouseEventHandler<HTMLDivElement> = (e) => {
@@ -29,8 +26,16 @@ const Ripple: FC<RippleProps> = ({ duration = 500 }) => {
     setRippleArray([...rippleArray, { x, y }]);
   };
 
+  // Add require style to parent element to make sure ripple effect work
+  useEffect(() => {
+    const rippleParent = rippleRef.current?.parentElement;
+    if (!rippleParent) return;
+    rippleParent.style.position = 'relative';
+    rippleParent.style.overflow = 'hidden';
+  }, [rippleRef]);
+
   return (
-    <div className={classes.wrapper} onClick={handleAddRipple}>
+    <div ref={rippleRef} className={classes.wrapper} onClick={handleAddRipple}>
       {rippleArray.length > 0 &&
         rippleArray.map((ripple, index) => {
           return (

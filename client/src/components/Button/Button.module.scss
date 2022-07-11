@@ -1,7 +1,5 @@
 .button {
-  position: relative;
   isolation: isolate;
-  overflow: hidden;
   @apply rounded-lg bg-blue-600 p-4 text-white;
 }
 

@@ -1,5 +1,4 @@
 .link {
-  position: relative;
   width: 75%;
   aspect-ratio: 1 / 1;
   display: flex;
@@ -9,17 +8,19 @@
   border-radius: 10px;
   font-size: 0.6rem;
   user-select: none;
-  @apply font-semibold text-[#404040];
+  color: #404040;
+  @apply font-semibold;
 
   .icon {
-    @apply fill-[#404040];
+    fill: #404040;
   }
 
   &:hover {
-    @apply bg-gray-200 text-[#1a1a1a];
+    color: #1a1a1a;
+    @apply bg-gray-200;
 
     .icon {
-      @apply fill-[#1a1a1a];
+      fill: #1a1a1a;
     }
   }
 }
