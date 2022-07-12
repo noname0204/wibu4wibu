@@ -27,7 +27,7 @@ module.exports = {
     const refreshToken = req.cookies['refresh_token'];
     if (!refreshToken) return next(new httpErrors.Unauthorized('Unvalid refresh token'));
 
-    jwt.verify(refreshToken, config.jwt.refreshKey, (error, { id }) => {
+    jwt.verify(refreshToken, config.jwt.refreshKey, (error, payload) => {
       if (error) {
         if (error.message === 'jwt expired') {
           return next(new httpErrors.Unauthorized('Token expired'));
@@ -36,10 +36,11 @@ module.exports = {
         return next(new httpErrors.Unauthorized('Unvalid refresh token'));
       }
 
-      redis.get(id, (error, reply) => {
+      redis.get(payload.id, (error, reply) => {
         if (error) return next(new httpErrors.InternalServerError());
         if (refreshToken !== reply) return next(new httpErrors.Unauthorized());
 
+        req.tokenPayload = payload;
         next();
       });
     });

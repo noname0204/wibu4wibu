@@ -21,12 +21,12 @@ module.exports = {
         avatarURL: avatarURL ?? null,
         password,
       });
-      const { password: newPassword, ...newUser } = (await user.save()).toObject();
+      const newUser = (await user.save()).toClient();
       const accessToken = await signAccessToken(newUser);
       const refreshToken = await signRefreshToken(newUser);
 
       setCookie(res, 'refresh_token', refreshToken);
-      res.status(200).json({ ...newUser, access_token: accessToken });
+      res.status(201).json({ ...newUser, access_token: accessToken });
     } catch (error) {
       next(error);
     }
@@ -44,7 +44,7 @@ module.exports = {
       const isValidPassword = await user.isValidPassword(password);
       if (!isValidPassword) throw httpErrors.Unauthorized('Wrong password');
 
-      const { password: userPassword, ...userPublicInfo } = user.toObject();
+      const userPublicInfo = user.toClient();
       const accessToken = await signAccessToken(user);
       const refreshToken = await signRefreshToken(user);
 
@@ -54,7 +54,7 @@ module.exports = {
       next(error);
     }
   },
-  async refresh(req, res, next) {
+  async refreshToken(req, res, next) {
     try {
       const payload = req.tokenPayload;
       const accessToken = await signAccessToken(payload);
@@ -62,6 +62,22 @@ module.exports = {
 
       setCookie(res, 'refresh_token', refreshToken);
       res.status(200).json({ access_token: accessToken });
+    } catch (error) {
+      next(error);
+    }
+  },
+  async refresh(req, res, next) {
+    try {
+      const payload = req.tokenPayload;
+
+      const user = await User.findOne({ _id: payload.id });
+
+      const userPublicInfo = user.toClient();
+      const accessToken = await signAccessToken(userPublicInfo);
+      const refreshToken = await signRefreshToken(userPublicInfo);
+
+      setCookie(res, 'refresh_token', refreshToken);
+      res.status(200).json({ ...userPublicInfo, access_token: accessToken });
     } catch (error) {
       next(error);
     }

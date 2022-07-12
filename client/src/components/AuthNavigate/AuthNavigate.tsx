@@ -4,16 +4,19 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useAppSelector } from '~/hooks';
 
 const AuthNavigate: FC<PropsWithChildren> = ({ children }) => {
-  const { currentUser } = useAppSelector((state) => state.user);
+  const currentUser = useAppSelector((state) => state.user);
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
   useEffect(() => {
-    if (!currentUser && !['/login', '/register'].includes(pathname)) {
-      return navigate('/login');
+    if (!currentUser.accessToken) {
+      const accessToken = localStorage.getItem('access_token');
+      if (!accessToken && !['/login', '/register'].includes(pathname)) {
+        return navigate('/login');
+      }
     }
 
-    if (currentUser && ['/login', '/register'].includes(pathname)) {
+    if (currentUser.accessToken && ['/login', '/register'].includes(pathname)) {
       return navigate('/');
     }
   }, [currentUser, navigate, pathname]);

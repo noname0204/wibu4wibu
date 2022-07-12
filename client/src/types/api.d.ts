@@ -1,7 +1,5 @@
-import type { AxiosError } from 'axios';
-
 export interface User {
-  _id: string;
+  id: string;
   username: string;
   avatarURL: string | null;
   role: 'user' | 'admin';
@@ -16,5 +14,3 @@ export interface FetchingResponseError {
 export interface RefreshTokenResponse {
   accessToken: string;
 }
-
-export type Error = AxiosError<FetchingResponseError>;
