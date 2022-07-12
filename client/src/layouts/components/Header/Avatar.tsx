@@ -12,8 +12,8 @@ const Avatar: FC = () => {
       className={classes.avatar}
       size='2.5rem'
       round
-      name={user?.username}
-      src={user?.avatarURL || defaultAvatar}
+      name={user.username}
+      src={user.avatarURL || defaultAvatar}
     />
   );
 };
