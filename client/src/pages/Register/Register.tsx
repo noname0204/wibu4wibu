@@ -3,10 +3,11 @@ import type { RegisterSchema } from '~/validations/auth';
 import type { FetchingResponseError } from '~/types/api';
 
 import { useState, useEffect } from 'react';
-import { useDocumentTitle } from '~/hooks';
+import { useDocumentTitle, useAppDispatch } from '~/hooks';
 import { useForm } from 'react-hook-form';
-import { useRegisterMutation } from '~/store/reducers/user';
+import { useRegisterMutation } from '~/api/authApi';
 import { registerResolver } from '~/validations/auth';
+import { setUserAndAccessToken } from '~/store/reducers/user';
 
 import { FadeIn } from '~/components/Animations';
 import Form from '~/components/Form';
@@ -25,6 +26,7 @@ const Register: FC = () => {
   } = useForm<RegisterSchema>({ resolver: registerResolver });
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [register, { isLoading, error }] = useRegisterMutation();
+  const dispatch = useAppDispatch();
   useDocumentTitle('Register');
 
   useEffect(() => {
@@ -36,7 +38,9 @@ const Register: FC = () => {
   }, [error]);
 
   const handleRegister = handleSubmit(async ({ confirmPassword, ...data }) => {
-    await register(data);
+    setErrorMessage('');
+    const user = await register(data).unwrap();
+    dispatch(setUserAndAccessToken(user));
   });
 
   return (

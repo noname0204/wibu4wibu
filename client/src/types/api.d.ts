@@ -3,6 +3,9 @@ export interface User {
   username: string;
   avatarURL: string | null;
   role: 'user' | 'admin';
+}
+
+export interface UserResponse extends User {
   accessToken: string;
 }
 

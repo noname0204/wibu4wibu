@@ -19,7 +19,7 @@ module.exports = {
   async signRefreshToken({ id, role }) {
     return new Promise((resolve, reject) => {
       const payload = { id, role };
-      const expiresTime = 365 * 24 * 60 * 60; // 1 year
+      const expiresTime = 7 * 24 * 60 * 60; // 1 week
       const options = {
         expiresIn: expiresTime,
       };

@@ -69,15 +69,12 @@ module.exports = {
   async refresh(req, res, next) {
     try {
       const payload = req.tokenPayload;
-
-      const user = await User.findOne({ _id: payload.id });
-
-      const userPublicInfo = user.toClient();
-      const accessToken = await signAccessToken(userPublicInfo);
-      const refreshToken = await signRefreshToken(userPublicInfo);
+      const user = (await User.findOne({ _id: payload.id })).toClient();
+      const accessToken = await signAccessToken(user);
+      const refreshToken = await signRefreshToken(user);
 
       setCookie(res, 'refresh_token', refreshToken);
-      res.status(200).json({ ...userPublicInfo, access_token: accessToken });
+      res.status(200).json({ ...user, acess_token: accessToken });
     } catch (error) {
       next(error);
     }

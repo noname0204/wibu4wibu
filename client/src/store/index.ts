@@ -1,13 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import userReducer, { userApi } from './reducers/user';
+import apiSlice from '~/api/apiSlice';
+import userReducer from './reducers/user';
 
 const store = configureStore({
   reducer: {
-    [userApi.reducerPath]: userApi.reducer,
+    [apiSlice.reducerPath]: apiSlice.reducer,
     user: userReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userApi.middleware),
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware().concat(apiSlice.middleware)
+  },
   devTools: import.meta.env.DEV,
 });
 

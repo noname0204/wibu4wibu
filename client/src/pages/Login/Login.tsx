@@ -3,10 +3,11 @@ import type { LoginSchema } from '~/validations/auth';
 import type { FetchingResponseError } from '~/types/api';
 
 import { useState, useEffect } from 'react';
-import { useDocumentTitle } from '~/hooks';
+import { useDocumentTitle, useAppDispatch } from '~/hooks';
 import { useForm } from 'react-hook-form';
-import { useLoginMutation } from '~/store/reducers/user';
+import { useLoginMutation } from '~/api/authApi';
 import { loginResolver } from '~/validations/auth';
+import { setUserAndAccessToken } from '~/store/reducers/user';
 
 import { FadeIn } from '~/components/Animations';
 import Form from '~/components/Form';
@@ -25,6 +26,7 @@ const Login: FC = () => {
   } = useForm<LoginSchema>({ resolver: loginResolver });
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [login, { isLoading, error }] = useLoginMutation();
+  const dispatch = useAppDispatch();
   useDocumentTitle('Login');
 
   useEffect(() => {
@@ -35,7 +37,11 @@ const Login: FC = () => {
     setErrorMessage(resError.message);
   }, [error]);
 
-  const handleLogin = handleSubmit(async (data) => await login(data));
+  const handleLogin = handleSubmit(async (data) => {
+    setErrorMessage('');
+    const user = await login(data).unwrap();
+    dispatch(setUserAndAccessToken(user));
+  });
 
   return (
     <FadeIn from='bottom'>
