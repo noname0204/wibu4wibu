@@ -74,7 +74,7 @@ module.exports = {
       const refreshToken = await signRefreshToken(user);
 
       setCookie(res, 'refresh_token', refreshToken);
-      res.status(200).json({ ...user, acess_token: accessToken });
+      res.status(200).json({ ...user, access_token: accessToken });
     } catch (error) {
       next(error);
     }
