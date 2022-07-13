@@ -14,21 +14,22 @@ const AuthNavigate: FC<PropsWithChildren> = ({ children }) => {
   const [refresh, { isLoading, isError }] = useRefreshMutation();
   const dispatch = useAppDispatch();
 
+  // Get user data with access token on load page
   useEffect(() => {
     (async () => {
       try {
         const user = await refresh().unwrap();
         dispatch(setUserAndAccessToken(user));
-      } catch (error) {
-        console.error(error);
-      }
+      } catch (error) {}
     })();
   }, []); // eslint-disable-line
 
+  // If error when get user data, navigate to login page
   useEffect(() => {
     if (isError && !['/login', '/register'].includes(pathname)) return navigate('/login');
   }, [isError]); // eslint-disable-line
 
+  // If user already login, auto navigate / when user move to /login or /register route
   useEffect(() => {
     if (user && ['/login', '/register'].includes(pathname)) {
       return navigate('/');

@@ -26,7 +26,7 @@ const Ripple: FC<RippleProps> = ({ duration = 500 }) => {
     setRippleArray([...rippleArray, { x, y }]);
   };
 
-  // Add require style to parent element to make sure ripple effect work
+  // Add require style to the parent element to make sure the ripple effect works
   useEffect(() => {
     const rippleParent = rippleRef.current?.parentElement;
     if (!rippleParent) return;

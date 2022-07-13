@@ -3,58 +3,6 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '~/store';
 import { createSlice } from '@reduxjs/toolkit';
 
-// const transformResponse = (response: unknown) => {
-//   const newResponse = camelizeKeys(response as object) as User;
-//   localStorage.setItem('access_token', newResponse.accessToken);
-//   return newResponse;
-// };
-
-// export const userApi = createApi({
-//   reducerPath: 'userApi',
-//   baseQuery: fetchBaseQuery({
-//     baseUrl: import.meta.env.VITE_API_URL + '/auth',
-//     credentials: 'include',
-//   }),
-//   endpoints: (build) => ({
-//     register: build.mutation<User, LoginSchema>({
-//       query: (data) => ({
-//         url: '/register',
-//         method: 'POST',
-//         body: data,
-//       }),
-//       transformResponse,
-//     }),
-//     login: build.mutation<User, LoginSchema>({
-//       query: (data) => ({
-//         url: '/login',
-//         method: 'POST',
-//         body: data,
-//       }),
-//       transformResponse,
-//     }),
-//     refresh: build.mutation<User, void>({
-//       query: () => ({
-//         url: '/refresh',
-//         method: 'POST',
-//       }),
-//       transformResponse,
-//     }),
-//     refreshToken: build.mutation<RefreshTokenResponse, void>({
-//       query: () => ({
-//         url: '/refresh-token',
-//         method: 'POST',
-//       }),
-//       transformResponse,
-//     }),
-//     logout: build.mutation({
-//       query: () => ({
-//         url: '/logout',
-//         method: 'DELETE',
-//       }),
-//     }),
-//   }),
-// });
-
 interface UserSlice {
   currentUser: User | null;
   accessToken: string | null;
@@ -62,7 +10,7 @@ interface UserSlice {
 
 const initialState: UserSlice = {
   currentUser: null,
-  accessToken: localStorage.getItem('access_token') || null,
+  accessToken: localStorage.getItem('access_token'),
 };
 
 const userSlice = createSlice({
