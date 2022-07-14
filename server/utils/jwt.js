@@ -7,7 +7,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       const payload = { id, role };
       const options = {
-        expiresIn: '10s',
+        expiresIn: '2h',
       };
 
       jwt.sign(payload, config.jwt.accessKey, options, (error, token) => {
