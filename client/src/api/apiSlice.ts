@@ -32,15 +32,15 @@ const baseQueryWithReAuth: BaseQueryFn<
 > = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
 
-  // Send refresh token if access token expired or invalid
-  if (result.error?.status === 401) {
+  // Send refresh token if access token expired
+  if (result.error?.status === 403) {
     const { data: refreshResult, error } = await baseQuery(
       '/auth/refresh-token',
       api,
       extraOptions
     );
 
-    // Log out if refresh token expired or invalid
+    // Logout if refresh token expired or invalid
     if (error?.status === 401) {
       api.dispatch(logOut());
     } else if (refreshResult) {

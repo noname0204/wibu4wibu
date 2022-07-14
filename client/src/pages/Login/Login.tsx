@@ -38,9 +38,11 @@ const Login: FC = () => {
   }, [error]);
 
   const handleLogin = handleSubmit(async (data) => {
-    setErrorMessage('');
-    const user = await login(data).unwrap();
-    dispatch(setUserAndAccessToken(user));
+    try {
+      setErrorMessage('');
+      const user = await login(data).unwrap();
+      dispatch(setUserAndAccessToken(user));
+    } catch (error) {} // Ignore when error
   });
 
   return (

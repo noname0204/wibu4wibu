@@ -9,15 +9,15 @@ module.exports = {
     if (!authHeader) return next(new httpErrors.Unauthorized());
     const token = authHeader.split(' ')[1];
 
-    if (!token) return next(new httpErrors.Unauthorized('Unvalid access token'));
+    if (!token) return next(new httpErrors.Unauthorized('Invalid access token'));
 
     jwt.verify(token, config.jwt.accessKey, (error, payload) => {
       if (error) {
         if (error.message === 'jwt expired') {
-          return next(new httpErrors.Unauthorized('Token expired'));
+          return next(new httpErrors.Forbidden('Token expired'));
         }
 
-        return next(new httpErrors.Unauthorized('Unvalid access token'));
+        return next(new httpErrors.Unauthorized('Invalid access token'));
       }
       req.tokenPayload = payload;
       next();
@@ -25,7 +25,7 @@ module.exports = {
   },
   verifyRefreshToken(req, res, next) {
     const refreshToken = req.cookies['refresh_token'];
-    if (!refreshToken) return next(new httpErrors.Unauthorized('Unvalid refresh token'));
+    if (!refreshToken) return next(new httpErrors.Unauthorized('Invalid refresh token'));
 
     jwt.verify(refreshToken, config.jwt.refreshKey, (error, payload) => {
       if (error) {
@@ -33,12 +33,14 @@ module.exports = {
           return next(new httpErrors.Unauthorized('Token expired'));
         }
 
-        return next(new httpErrors.Unauthorized('Unvalid refresh token'));
+        return next(new httpErrors.Unauthorized('Invalid refresh token'));
       }
 
       redis.get(payload.id, (error, reply) => {
         if (error) return next(new httpErrors.InternalServerError());
-        if (refreshToken !== reply) return next(new httpErrors.Unauthorized());
+        if (refreshToken !== reply) {
+          return next(new httpErrors.Unauthorized('Invalid refresh token'));
+        }
 
         req.tokenPayload = payload;
         next();

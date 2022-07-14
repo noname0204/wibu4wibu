@@ -6,6 +6,7 @@ const { registerValidation, loginValidation } = require('../validations/auth');
 const { signAccessToken, signRefreshToken } = require('../utils/jwt');
 
 module.exports = {
+  // Register new user
   async register(req, res, next) {
     try {
       const { error } = registerValidation(req.body);
@@ -31,6 +32,7 @@ module.exports = {
       next(error);
     }
   },
+  // Login user
   async login(req, res, next) {
     try {
       const { error } = loginValidation(req.body);
@@ -54,6 +56,7 @@ module.exports = {
       next(error);
     }
   },
+  // Get new access and refresh token when old access token expired
   async refreshToken(req, res, next) {
     try {
       const payload = req.tokenPayload;
@@ -66,19 +69,18 @@ module.exports = {
       next(error);
     }
   },
+  // Get user data with access token when user refresh or load page
   async refresh(req, res, next) {
     try {
       const payload = req.tokenPayload;
       const user = (await User.findOne({ _id: payload.id })).toClient();
-      const accessToken = await signAccessToken(user);
-      const refreshToken = await signRefreshToken(user);
 
-      setCookie(res, 'refresh_token', refreshToken);
-      res.status(200).json({ ...user, access_token: accessToken });
+      res.status(200).json(user);
     } catch (error) {
       next(error);
     }
   },
+  // Clear cookie and refresh token on redis db when user logout
   async logout(req, res, next) {
     try {
       res.clearCookie('refresh_token');

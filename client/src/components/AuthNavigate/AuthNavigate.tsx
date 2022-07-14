@@ -2,7 +2,7 @@ import type { FC, PropsWithChildren } from 'react';
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '~/hooks';
-import { setUserAndAccessToken } from '~/store/reducers/user';
+import { setUser, logOut } from '~/store/reducers/user';
 import { selectCurrentUser } from '~/store/reducers/user';
 import { useRefreshMutation } from '~/api/authApi';
 import { LoadingSpinner } from '~/components/LoadingSpinner';
@@ -19,8 +19,10 @@ const AuthNavigate: FC<PropsWithChildren> = ({ children }) => {
     (async () => {
       try {
         const user = await refresh().unwrap();
-        dispatch(setUserAndAccessToken(user));
-      } catch (error) {}
+        dispatch(setUser(user));
+      } catch (error) {
+        dispatch(logOut());
+      }
     })();
   }, []); // eslint-disable-line
 

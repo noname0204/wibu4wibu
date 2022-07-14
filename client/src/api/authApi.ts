@@ -1,4 +1,4 @@
-import { UserResponse } from '~/types/api';
+import { User, UserResponse } from '~/types/api';
 import { LoginSchema } from '~/validations/auth';
 import apiSlice from './apiSlice';
 
@@ -18,7 +18,7 @@ const authApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
-    refresh: build.mutation<UserResponse, void>({
+    refresh: build.mutation<User, void>({
       query: () => ({
         url: '/auth/refresh',
         method: 'POST',

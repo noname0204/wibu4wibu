@@ -38,9 +38,11 @@ const Register: FC = () => {
   }, [error]);
 
   const handleRegister = handleSubmit(async ({ confirmPassword, ...data }) => {
-    setErrorMessage('');
-    const user = await register(data).unwrap();
-    dispatch(setUserAndAccessToken(user));
+    try {
+      setErrorMessage('');
+      const user = await register(data).unwrap();
+      dispatch(setUserAndAccessToken(user));
+    } catch (error) {} // Ignore when error
   });
 
   return (

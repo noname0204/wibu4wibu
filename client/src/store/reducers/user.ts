@@ -17,11 +17,14 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUserAndAccessToken(state, action: PayloadAction<UserResponse>) {
-      const { accessToken, ...userInfo } = action.payload;
+    setUserAndAccessToken(state, { payload }: PayloadAction<UserResponse>) {
+      const { accessToken, ...userInfo } = payload;
       localStorage.setItem('access_token', accessToken);
       state.currentUser = userInfo;
       state.accessToken = accessToken;
+    },
+    setUser(state, { payload }: PayloadAction<User>) {
+      state.currentUser = payload;
     },
     setAccessToken(state, { payload }: PayloadAction<string>) {
       localStorage.setItem('access_token', payload);
@@ -38,5 +41,6 @@ const userSlice = createSlice({
 export const selectCurrentUser = (state: RootState) => state.user.currentUser;
 export const selectAccessToken = (state: RootState) => state.user.accessToken;
 
-export const { setUserAndAccessToken, setAccessToken, logOut } = userSlice.actions;
+export const { setUserAndAccessToken, setUser, setAccessToken, logOut } =
+  userSlice.actions;
 export default userSlice.reducer;
