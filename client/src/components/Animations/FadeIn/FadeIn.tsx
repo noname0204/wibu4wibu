@@ -1,22 +1,24 @@
-import type { FC, PropsWithChildren } from 'react';
-import { motion } from 'framer-motion';
-import classNames from 'classnames';
+import type { FC, PropsWithChildren, CSSProperties } from 'react';
+import classNames from 'classnames/bind';
+import classes from './FadeIn.module.scss';
 
 interface FadeInProps extends PropsWithChildren {
   from?: 'top' | 'bottom' | 'left' | 'right';
+  lenght?: number;
   duration?: number;
 }
 
-const FadeIn: FC<FadeInProps> = ({ from, duration = 0.5, children }) => {
+const cx = classNames.bind(classes);
+const FadeIn: FC<FadeInProps> = ({ from, duration = 0.5, lenght = 100, children }) => {
   return (
-    <motion.div
-      initial={from ? { [from]: '-100px', opacity: 0 } : { opacity: 0 }}
-      animate={from ? { [from]: 0, opacity: 1 } : { opacity: 1 }}
-      transition={{ default: { duration } }}
-      className={classNames(from && 'relative')}
+    <div
+      className={cx(from && 'relative', from ? `fade-in-from-${from}` : `fade-in`)}
+      style={
+        { '--duration': `${duration}s`, '--lenght': `-${lenght}px` } as CSSProperties
+      }
     >
       {children}
-    </motion.div>
+    </div>
   );
 };
 

@@ -13,7 +13,7 @@ const useDebouncedRippleCleanUp = (
       bounce = setTimeout(() => {
         cleanUpFunction();
         if (bounce) clearTimeout(bounce);
-      }, duration * 4);
+      }, duration);
     }
 
     return () => {

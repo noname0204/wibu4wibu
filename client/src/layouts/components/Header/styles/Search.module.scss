@@ -33,6 +33,7 @@ $search-items-margin: 0.7rem;
 
 .search-input {
   width: calc(100% - #{$search-icon-width});
+  background: transparent;
   display: flex;
   align-items: center;
   outline: none;

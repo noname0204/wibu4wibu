@@ -6,10 +6,6 @@
   place-content: center;
 
   @apply bg-blue-500;
-
-  &:hover .icon {
-    transform: scale(1.5);
-  }
 }
 
 .icon {
