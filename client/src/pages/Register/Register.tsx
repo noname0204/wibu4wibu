@@ -3,7 +3,7 @@ import type { RegisterSchema } from '~/validations/auth';
 import type { FetchingResponseError } from '~/types/api';
 
 import { useState, useEffect } from 'react';
-import { useDocumentTitle, useAppDispatch } from '~/hooks';
+import { useSetDocumentTitle, useAppDispatch } from '~/hooks';
 import { useForm } from 'react-hook-form';
 import { useRegisterMutation } from '~/api/authApi';
 import { registerResolver } from '~/validations/auth';
@@ -27,7 +27,7 @@ const Register: FC = () => {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [register, { isLoading, error }] = useRegisterMutation();
   const dispatch = useAppDispatch();
-  useDocumentTitle('Register');
+  useSetDocumentTitle('Register');
 
   useEffect(() => {
     if (!error) return;

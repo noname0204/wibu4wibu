@@ -3,7 +3,7 @@ import type { LoginSchema } from '~/validations/auth';
 import type { FetchingResponseError } from '~/types/api';
 
 import { useState, useEffect } from 'react';
-import { useDocumentTitle, useAppDispatch } from '~/hooks';
+import { useSetDocumentTitle, useAppDispatch } from '~/hooks';
 import { useForm } from 'react-hook-form';
 import { useLoginMutation } from '~/api/authApi';
 import { loginResolver } from '~/validations/auth';
@@ -27,7 +27,7 @@ const Login: FC = () => {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [login, { isLoading, error }] = useLoginMutation();
   const dispatch = useAppDispatch();
-  useDocumentTitle('Login');
+  useSetDocumentTitle('Login');
 
   useEffect(() => {
     if (!error) return;

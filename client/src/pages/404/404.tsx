@@ -3,9 +3,12 @@ import classNames from 'classnames/bind';
 import classes from './404.module.scss';
 import { Link } from 'react-router-dom';
 import Button from '~/components/Button';
+import { useSetDocumentTitle } from '~/hooks';
 
 const cx = classNames.bind(classes);
 const Error404: FC = () => {
+  useSetDocumentTitle('Not found');
+
   return (
     <section className={cx('wrapper')}>
       <div className={cx('page-container')}>
