@@ -8,11 +8,11 @@ const useDebouncedRippleCleanUp = (
   useLayoutEffect(() => {
     let bounce: number | undefined;
     if (rippleCount > 0) {
-      if (bounce) clearTimeout(bounce);
+      if (bounce) window.clearTimeout(bounce);
 
-      bounce = setTimeout(() => {
+      bounce = window.setTimeout(() => {
         cleanUpFunction();
-        if (bounce) clearTimeout(bounce);
+        if (bounce) window.clearTimeout(bounce);
       }, duration);
     }
 
