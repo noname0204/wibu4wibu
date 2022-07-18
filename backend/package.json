@@ -1,6 +1,8 @@
 {
-  "private": "true",
+  "name": "backend",
+  "version": "0.0.0",
   "main": "index.js",
+  "license": "MIT",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"

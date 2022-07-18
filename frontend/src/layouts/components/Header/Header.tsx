@@ -12,7 +12,7 @@ const Header: FC = () => {
   return (
     <header className={classes.wrapper}>
       <Link to='/' className={classes.title}>
-        <Paragraph size={5}>WibuForWibu</Paragraph>
+        <Paragraph size={5}>WorldForWibu</Paragraph>
       </Link>
       <MobileMenuShowButton />
       <Search />

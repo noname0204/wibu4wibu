@@ -1,0 +1,8 @@
+{
+  "name": "world4wibu",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ]
+}
