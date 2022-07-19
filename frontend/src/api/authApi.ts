@@ -1,17 +1,17 @@
 import { User, UserResponse } from '~/types/api';
-import { LoginSchema } from '~/validations/auth';
+import { LoginValidation } from '~/types/validations';
 import apiSlice from './apiSlice';
 
 const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (build) => ({
-    login: build.mutation<UserResponse, LoginSchema>({
+    login: build.mutation<UserResponse, LoginValidation>({
       query: (data) => ({
         url: '/auth/login',
         method: 'POST',
         body: data,
       }),
     }),
-    register: build.mutation<UserResponse, LoginSchema>({
+    register: build.mutation<UserResponse, LoginValidation>({
       query: (data) => ({
         url: '/auth/register',
         method: 'POST',
@@ -24,7 +24,18 @@ const authApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
       }),
     }),
+    logout: build.mutation<void, void>({
+      query: () => ({
+        url: '/auth/logout',
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useRefreshMutation } = authApiSlice;
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useRefreshMutation,
+  useLogoutMutation,
+} = authApiSlice;

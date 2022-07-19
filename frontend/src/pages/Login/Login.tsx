@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import type { LoginSchema } from '~/validations/auth';
+import type { LoginValidation } from '~/types/validations';
 import type { FetchingResponseError } from '~/types/api';
 
 import { useState, useEffect } from 'react';
@@ -23,7 +23,7 @@ const Login: FC = () => {
     register: formRegister,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginSchema>({ resolver: loginResolver });
+  } = useForm<LoginValidation>({ resolver: loginResolver });
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [login, { isLoading, error }] = useLoginMutation();
   const dispatch = useAppDispatch();

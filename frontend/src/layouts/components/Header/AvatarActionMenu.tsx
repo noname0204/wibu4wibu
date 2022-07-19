@@ -1,4 +1,7 @@
-import type { FC, ReactElement } from 'react';
+import type { FC, ReactElement, MouseEventHandler } from 'react';
+import { useLogoutMutation } from '~/api/authApi';
+import { useAppDispatch } from '~/hooks';
+import { logOut } from '~/store/reducers/user';
 import Tippy from '@tippyjs/react/headless';
 import { FadeIn } from '~/components/Animations';
 import { PopperItemLink, PopperWrapper } from '~/components/Popper';
@@ -16,6 +19,15 @@ const AvatarActionMenu: FC<AvatarActionMenuProps> = ({
   onClickOutSide,
   children,
 }) => {
+  const [logout] = useLogoutMutation();
+  const dispatch = useAppDispatch();
+
+  const handleLogoutClick: MouseEventHandler<HTMLAnchorElement> = async (e) => {
+    e.preventDefault();
+    await logout();
+    dispatch(logOut());
+  };
+
   return (
     <Tippy
       interactive
@@ -24,7 +36,12 @@ const AvatarActionMenu: FC<AvatarActionMenuProps> = ({
         <FadeIn from='top' lenght={15} duration={0.2}>
           <PopperWrapper width={170} {...attrs}>
             <PopperItemLink to='/' label='Profile' icon={FaRegUserCircle} />
-            <PopperItemLink to='/' label='Logout' icon={MdLogout} />
+            <PopperItemLink
+              to='/'
+              label='Logout'
+              icon={MdLogout}
+              onClick={handleLogoutClick}
+            />
           </PopperWrapper>
         </FadeIn>
       )}

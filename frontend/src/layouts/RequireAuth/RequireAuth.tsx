@@ -1,17 +1,19 @@
-import type { FC, PropsWithChildren } from 'react';
+import type { FC } from 'react';
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '~/hooks';
 import { setUser, logOut } from '~/store/reducers/user';
 import { selectCurrentUser } from '~/store/reducers/user';
 import { useRefreshMutation } from '~/api/authApi';
+import { Outlet } from 'react-router-dom';
 import { LoadingSpinner } from '~/components/LoadingSpinner';
 
-const AuthNavigate: FC<PropsWithChildren> = ({ children }) => {
+const authRoutes = ['/login', '/register'];
+const AuthNavigate: FC = () => {
   const user = useAppSelector(selectCurrentUser);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const [refresh, { isLoading, isError }] = useRefreshMutation();
+  const [refresh, { isLoading }] = useRefreshMutation();
   const dispatch = useAppDispatch();
 
   // Get user data with access token on load page
@@ -26,14 +28,14 @@ const AuthNavigate: FC<PropsWithChildren> = ({ children }) => {
     })();
   }, []); // eslint-disable-line
 
-  // If error when get user data, navigate to login page
   useEffect(() => {
-    if (isError && !['/login', '/register'].includes(pathname)) return navigate('/login');
-  }, [isError]); // eslint-disable-line
+    // If user isn't logged in, auto navigate to /login
+    if (!user && !authRoutes.includes(pathname)) {
+      return navigate('/login');
+    }
 
-  // If user already login, auto navigate / when user move to /login or /register route
-  useEffect(() => {
-    if (user && ['/login', '/register'].includes(pathname)) {
+    // If user is logged in, auto navigate / when user move to authRoutes
+    if (user && authRoutes.includes(pathname)) {
       return navigate('/');
     }
   }, [user, pathname]); // eslint-disable-line
@@ -46,7 +48,7 @@ const AuthNavigate: FC<PropsWithChildren> = ({ children }) => {
     );
   }
 
-  return <>{children}</>;
+  return <Outlet />;
 };
 
 export default AuthNavigate;

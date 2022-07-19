@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import type { RegisterSchema } from '~/validations/auth';
+import type { RegisterValidation } from '~/types/validations';
 import type { FetchingResponseError } from '~/types/api';
 
 import { useState, useEffect } from 'react';
@@ -23,7 +23,7 @@ const Register: FC = () => {
     register: formRegister,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterSchema>({ resolver: registerResolver });
+  } = useForm<RegisterValidation>({ resolver: registerResolver });
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [register, { isLoading, error }] = useRegisterMutation();
   const dispatch = useAppDispatch();

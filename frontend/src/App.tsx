@@ -1,13 +1,32 @@
 import type { FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import routes from '~/routes';
+
+// Layouts
+import RequireAuth from '~/layouts/RequireAuth';
+import AuthLayout from '~/layouts/AuthLayout';
+import DefaultLayout from '~/layouts/DefaultLayout';
+
+// Pages
+import Home from '~/pages/Home';
+import Login from '~/pages/Login';
+import Register from '~/pages/Register';
+import Error404 from '~/pages/404';
 
 const App: FC = () => {
   return (
     <Routes>
-      {routes.map((route, index) => (
-        <Route key={index} path={route.path} element={route.element} />
-      ))}
+      <Route path='/' element={<RequireAuth />}>
+        <Route path='/' element={<DefaultLayout />}>
+          <Route path='/' element={<Home />} />
+        </Route>
+
+        <Route path='/' element={<AuthLayout />}>
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+        </Route>
+
+        <Route path='*' element={<Error404 />} />
+      </Route>
     </Routes>
   );
 };
