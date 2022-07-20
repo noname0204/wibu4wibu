@@ -1,7 +1,8 @@
-const env = require('env-var');
-require('dotenv').config();
+import Config from '~/types/config';
+import env from 'env-var';
+import 'dotenv/config';
 
-module.exports = {
+const config: Config = {
   redis: {
     host: env.get('REDIS_HOST').required().asString(),
     port: env.get('REDIS_PORT').required().asPortNumber(),
@@ -12,7 +13,8 @@ module.exports = {
     accessKey: env.get('JWT_ACCESS_KEY').required().asString(),
     refreshKey: env.get('JWT_REFRESH_KEY').required().asString(),
   },
-  databaseURL: env.get('DB_URL').required().asString(),
+  mongoURL: env.get('DB_URL').required().asString(),
   port: env.get('PORT').default(8000).asPortNumber(),
-  env: env.get('ENV').default('PRODUCTION').asString(),
 };
+
+export default config;

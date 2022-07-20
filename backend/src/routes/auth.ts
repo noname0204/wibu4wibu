@@ -1,6 +1,6 @@
-const { Router } = require('express');
-const authController = require('../controllers/auth');
-const { verifyRefreshToken, verifyAccessToken } = require('../middlewares/verifyToken');
+import { Router } from 'express';
+import * as authController from '~/controllers/auth';
+import { verifyAccessToken, verifyRefreshToken } from '~/middlewares/verifyToken';
 
 const authRoute = Router();
 
@@ -10,4 +10,4 @@ authRoute.get('/refresh-token', verifyRefreshToken, authController.refreshToken)
 authRoute.post('/refresh', verifyAccessToken, authController.refresh);
 authRoute.delete('/logout', verifyAccessToken, authController.logout);
 
-module.exports = authRoute;
+export default authRoute;

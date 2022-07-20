@@ -35,7 +35,12 @@ const AvatarActionMenu: FC<AvatarActionMenuProps> = ({
       render={(attrs) => (
         <FadeIn from='top' lenght={15} duration={0.2}>
           <PopperWrapper width={170} {...attrs}>
-            <PopperItemLink to='/' label='Profile' icon={FaRegUserCircle} />
+            <PopperItemLink
+              to='/profile'
+              label='Profile'
+              icon={FaRegUserCircle}
+              onClick={onClickOutSide}
+            />
             <PopperItemLink
               to='/'
               label='Logout'

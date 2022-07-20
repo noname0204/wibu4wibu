@@ -20,8 +20,18 @@ const ActionMenu: FC<ActionMenuProps> = ({ open, onClickOutSide, children }) => 
         render={(attrs) => (
           <FadeIn from='top' lenght={15} duration={0.2}>
             <PopperWrapper width={190} {...attrs}>
-              <PopperItemLink to='/' label='New content' icon={FaPen} />
-              <PopperItemLink to='/' label='New chill radio' icon={BsMusicNoteBeamed} />
+              <PopperItemLink
+                to='/'
+                label='New content'
+                icon={FaPen}
+                onClick={onClickOutSide}
+              />
+              <PopperItemLink
+                to='/'
+                label='New chill radio'
+                icon={BsMusicNoteBeamed}
+                onClick={onClickOutSide}
+              />
             </PopperWrapper>
           </FadeIn>
         )}

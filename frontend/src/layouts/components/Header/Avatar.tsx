@@ -1,5 +1,6 @@
 import type { FC } from 'react';
-import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { useAppSelector } from '~/hooks';
 import { selectCurrentUser } from '~/store/reducers/user';
 import defaultAvatar from '~/assets/default-avatar.jpg';
@@ -9,9 +10,14 @@ import AvatarActionMenu from './AvatarActionMenu';
 
 const Avatar: FC = () => {
   const user = useAppSelector(selectCurrentUser);
+  const { pathname } = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const handleHideMenu = () => setIsMenuOpen(false);
   const handleShowMenu = () => setIsMenuOpen(true);
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   return (
     <div className='hidden lg:block'>

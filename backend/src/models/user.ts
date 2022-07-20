@@ -1,8 +1,15 @@
-const { Schema } = require('mongoose');
-const mongoose = require('../db/mongoose');
-const bcrypt = require('bcrypt');
+import type { UserModel, User } from '~/types/models';
+import type { Model, CallbackError } from 'mongoose';
+import mongoose from 'mongoose';
+import mongodb from '~/db/mongodb';
+import bcrypt from 'bcryptjs';
 
-const schema = new Schema(
+interface InstanceMethods {
+  isValidPassword: (password: string) => Promise<boolean>;
+  toClient: () => User;
+}
+
+const schema = new mongoose.Schema<UserModel, Model<UserModel, {}, InstanceMethods>>(
   {
     username: {
       type: String,
@@ -34,14 +41,13 @@ schema.pre('save', async function (next) {
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(this.password, salt);
     this.password = hashedPassword;
-
     next();
   } catch (error) {
-    next(error);
+    next(error as CallbackError);
   }
 });
 
-schema.methods.isValidPassword = async function (password) {
+schema.methods.isValidPassword = async function (password: string) {
   try {
     return await bcrypt.compare(password, this.password);
   } catch (error) {
@@ -54,7 +60,10 @@ schema.methods.toClient = function () {
   obj.id = obj._id;
   delete obj._id;
   delete obj.password;
-  return obj;
+  return obj as User;
 };
 
-module.exports = mongoose.model('user', schema);
+export default mongodb.model<UserModel, Model<UserModel, {}, InstanceMethods>>(
+  'user',
+  schema
+);
