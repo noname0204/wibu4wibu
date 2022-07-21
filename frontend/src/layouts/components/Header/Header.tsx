@@ -1,19 +1,16 @@
 import type { FC } from 'react';
-import Paragraph from '~/components/Paragraph';
 import Search from './Search';
 import { Avatar } from '../Avatar';
-import { Link } from 'react-router-dom';
 import NotificationBell from './NotificationBell';
 import { MobileMenuShowButton } from '../MobileMenu';
 import SearchButton from './SearchButton';
 import classes from './styles/Header.module.scss';
+import Logo from './Logo';
 
 const Header: FC = () => {
   return (
     <header className={classes.wrapper}>
-      <Link to='/' className={classes.title}>
-        <Paragraph size={5}>WorldForWibu</Paragraph>
-      </Link>
+      <Logo />
       <MobileMenuShowButton />
       <Search />
       <div className='ml-0 flex items-center gap-5 lg:ml-16 '>

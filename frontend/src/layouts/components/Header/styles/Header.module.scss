@@ -8,11 +8,11 @@
   @apply border-gray-300;
 }
 
-.title {
-  display: none;
-  font-size: 1.6rem !important;
-  line-height: 3rem !important;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  @apply font-pacifico bg-gradient-to-r from-blue-600 via-sky-600 to-cyan-600 lg:block;
+.logo-wrapper {
+  @apply hidden lg:block;
+}
+
+.logo {
+  pointer-events: none;
+  user-select: none;
 }

@@ -18,7 +18,7 @@ const App: FC = () => {
     <Routes>
       <Route path='/' element={<RequireAuth />}>
         <Route path='/' element={<DefaultLayout />}>
-          <Route path='/' element={<Home />} />
+          <Route index element={<Home />} />
           <Route path='profile' element={<Profile />} />
         </Route>
 
