@@ -1,31 +1,32 @@
 import type { FC } from 'react';
-import classNames from 'classnames/bind';
-import classes from './404.module.scss';
 import { Link } from 'react-router-dom';
-import Button from '~/components/Button';
 import { useSetDocumentTitle } from '~/hooks';
+import {
+  Container,
+  Content,
+  ErrorCode,
+  StyledButton,
+  Title,
+  Wrapper,
+} from './404.styled';
 
-const cx = classNames.bind(classes);
 const Error404: FC = () => {
   useSetDocumentTitle('Not found');
 
   return (
-    <section className={cx('wrapper')}>
-      <div className={cx('page-container')}>
-        <div className={cx('content')}>
-          <h2 className={cx('error-code')}>404</h2>
-          <p className='text-2xl font-semibold md:text-3xl'>
+    <Container>
+      <Wrapper>
+        <Content>
+          <ErrorCode>404</ErrorCode>
+          <Title fontStyle='bold' size={2}>
             Sorry, we couldn't find this page.
-          </p>
-          <p className='mt-4 mb-8 text-gray-600'>
-            But dont worry, you can find plenty of other things on our homepage.
-          </p>
+          </Title>
           <Link to='/'>
-            <Button className='!rounded-full font-bold'>Back to homepage</Button>
+            <StyledButton>Back to homepage</StyledButton>
           </Link>
-        </div>
-      </div>
-    </section>
+        </Content>
+      </Wrapper>
+    </Container>
   );
 };
 

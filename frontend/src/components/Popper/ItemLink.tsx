@@ -1,9 +1,7 @@
 import type { FC, MouseEventHandler } from 'react';
 import type { IconType } from 'react-icons';
-import classNames from 'classnames/bind';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import classes from './styles/ItemLink.module.scss';
-import { Ripple } from '../Animations';
 
 interface ItemProps {
   to: string;
@@ -12,14 +10,34 @@ interface ItemProps {
   onClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
-const cx = classNames.bind(classes);
+const StyledLink = styled(Link)`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  padding-left: 1rem;
+
+  &:hover {
+    background-color: ${(p) => p.theme.color.gray[2]};
+  }
+`;
+
+const StyledLabel = styled.span`
+  user-select: none;
+  color: ${(p) => p.theme.color.gray[7]};
+`;
+
 const ItemLink: FC<ItemProps> = ({ to, label, icon: Icon, onClick }) => {
+  const StyledIcon = styled(Icon)`
+    fill: ${(p) => p.theme.color.gray[7]};
+  `;
+
   return (
-    <Link to={to} className={cx('link-wrapper')} onClick={onClick}>
-      <Icon className={cx('link-icon')} />
-      <span className={cx('link-label')}>{label}</span>
-      <Ripple />
-    </Link>
+    <StyledLink to={to} onClick={onClick}>
+      <StyledIcon />
+      <StyledLabel>{label}</StyledLabel>
+    </StyledLink>
   );
 };
 

@@ -33,8 +33,8 @@ const AvatarActionMenu: FC<AvatarActionMenuProps> = ({
       interactive
       placement='bottom-start'
       render={(attrs) => (
-        <FadeIn from='top' lenght={15} duration={0.2}>
-          <PopperWrapper width={170} {...attrs}>
+        <FadeIn from='top' lenght={15} duration={200}>
+          <PopperWrapper width='170px' {...attrs}>
             <PopperItemLink
               to='/profile'
               label='Profile'

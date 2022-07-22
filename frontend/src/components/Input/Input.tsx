@@ -1,8 +1,14 @@
 import type { InputHTMLAttributes } from 'react';
-import { forwardRef, useState, useMemo } from 'react';
+import { forwardRef, useState, useMemo, useId } from 'react';
+import {
+  Container,
+  StyledLabel,
+  InputWrapper,
+  StyledInput,
+  IconWrapper,
+  ErrorLabel,
+} from './Input.styled';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
-import classNames from 'classnames/bind';
-import classes from './Input.module.scss';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   fullWidth?: boolean;
@@ -11,9 +17,9 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string;
 }
 
-const cx = classNames.bind(classes);
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ fullWidth = false, label, error, errorMessage, type, ...inputProps }, ref) => {
+    const id = useId();
     const [visible, setVisible] = useState<boolean>(type !== 'password');
     const EyeIcon = useMemo(() => (visible ? AiFillEyeInvisible : AiFillEye), [visible]);
 
@@ -22,11 +28,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     };
 
     return (
-      <div className={cx(fullWidth && 'w-full', error && errorMessage && '-mb-2')}>
-        <label className={cx('base-label', error && 'error-label')}>{label}</label>
-        <div className='relative mt-1'>
-          <input
-            className={cx('base-input', error ? 'error-input' : 'default-input')}
+      <Container fullWidth marginBottom={error && !!errorMessage ? '-0.5rem' : '0'}>
+        <StyledLabel htmlFor={id} error={error}>
+          {label}
+        </StyledLabel>
+        <InputWrapper>
+          <StyledInput
+            id={id}
+            error={error}
             placeholder={`Enter ${label}`}
             type={visible ? 'text' : 'password'}
             ref={ref}
@@ -34,21 +43,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             {...inputProps}
           />
           {type === 'password' && (
-            <span className='absolute inset-y-0 right-4 inline-flex items-center'>
-              <EyeIcon
-                className={cx(
-                  'base-eye-icon',
-                  error ? 'error-eye-icon' : 'default-eye-icon'
-                )}
-                onClick={handleEyeClick}
-              />
-            </span>
+            <IconWrapper error={error}>
+              <EyeIcon onClick={handleEyeClick} />
+            </IconWrapper>
           )}
-        </div>
-        {error && errorMessage && (
-          <label className='pl-2 text-sm text-red-500'>{errorMessage}</label>
-        )}
-      </div>
+        </InputWrapper>
+        {error && errorMessage && <ErrorLabel htmlFor={id}>{errorMessage}</ErrorLabel>}
+      </Container>
     );
   }
 );

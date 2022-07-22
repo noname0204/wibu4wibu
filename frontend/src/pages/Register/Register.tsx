@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import type { RegisterValidation } from '~/types/validations';
 import type { FetchingResponseError } from '~/types/api';
 
+import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { useSetDocumentTitle, useAppDispatch } from '~/hooks';
 import { useForm } from 'react-hook-form';
@@ -10,13 +11,16 @@ import { registerResolver } from '~/validations/auth';
 import { setUserAndAccessToken } from '~/store/reducers/user';
 
 import { FadeIn } from '~/components/Animations';
-import Form from '~/components/Form';
-import Paragraph from '~/components/Paragraph';
+import { Form, Paragraph } from '~/components/Styled';
 import Alert from '~/components/Alert';
 import Input from '~/components/Input';
 import Button from '~/components/Button';
 import Divider from '~/components/Divider';
 import { Link } from 'react-router-dom';
+
+const StyledButton = styled(Button)`
+  margin-top: 0.75rem;
+`;
 
 const Register: FC = () => {
   const {
@@ -48,7 +52,7 @@ const Register: FC = () => {
   return (
     <FadeIn from='bottom'>
       <Form width='27rem' onSubmit={handleRegister}>
-        <Paragraph fontStyle='semibold' color='#011d33' size={6}>
+        <Paragraph fontStyle='semibold' color='#011d33' size={2.2}>
           Register
         </Paragraph>
         {errorMessage && (
@@ -84,9 +88,9 @@ const Register: FC = () => {
           error={errors.confirmPassword !== undefined}
           errorMessage={errors.confirmPassword?.message}
         />
-        <Button className='mt-3' fullWidth disabled={isLoading}>
+        <StyledButton fullWidth disabled={isLoading}>
           Register
-        </Button>
+        </StyledButton>
         <Divider label='OR' />
         <Paragraph>
           Have an account? <Link to='/login'>Login</Link>

@@ -1,24 +1,15 @@
-import type { FC, HTMLAttributes } from 'react';
-import classNames from 'classnames/bind';
-import classes from './styles/Wrapper.module.scss';
+import styled from 'styled-components';
 
-interface WrapperProps extends HTMLAttributes<HTMLDivElement> {
-  width?: string | number;
+interface WrapperProps {
+  width?: string;
 }
 
-const cx = classNames.bind(classes);
-const Wrapper: FC<WrapperProps> = ({
-  width,
-  className,
-  children,
-  style,
-  ...divProps
-}) => {
-  return (
-    <div className={cx('wrapper', className)} style={{ width, ...style }} {...divProps}>
-      {children}
-    </div>
-  );
-};
+const Wrapper = styled.div<WrapperProps>`
+  width: ${(p) => (p.width ? p.width : 'auto')};
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  border-radius: 0.4rem;
+  background-color: white;
+  padding: 0.75rem 0;
+`;
 
 export default Wrapper;

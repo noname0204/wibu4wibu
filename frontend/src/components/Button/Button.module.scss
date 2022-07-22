@@ -1,9 +1,0 @@
-.button {
-  isolation: isolate;
-  @apply rounded-lg bg-blue-600 p-4 text-white;
-}
-
-.disabled {
-  cursor: not-allowed;
-  @apply bg-blue-500;
-}

@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { useLocation, Navigate, Outlet } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '~/hooks';
@@ -6,6 +7,13 @@ import { setUser, logOut } from '~/store/reducers/user';
 import { selectCurrentUser } from '~/store/reducers/user';
 import { useRefreshMutation } from '~/api/authApi';
 import { LoadingSpinner } from '~/components/LoadingSpinner';
+
+const LoaderWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-content: center;
+`;
 
 const authRoutes = ['/login', '/register'];
 const AuthNavigate: FC = () => {
@@ -31,9 +39,9 @@ const AuthNavigate: FC = () => {
 
   if (isLoading) {
     return (
-      <div className='grid h-full w-full place-content-center'>
+      <LoaderWrapper>
         <LoadingSpinner size={7} />
-      </div>
+      </LoaderWrapper>
     );
   }
 

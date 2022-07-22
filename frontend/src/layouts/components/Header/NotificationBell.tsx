@@ -1,16 +1,32 @@
 import type { FC } from 'react';
-import classNames from 'classnames/bind';
-import classes from './styles/NotificationBell.module.scss';
+import styled from 'styled-components';
 import { IoMdNotifications } from 'react-icons/io';
 import { Ripple } from '~/components/Animations';
 
-const cx = classNames.bind(classes);
+const Wrapper = styled.div`
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: ${(p) => p.theme.color.gray[1]};
+  }
+
+  &:hover > svg {
+    fill: ${(p) => p.theme.color.gray[4] + p.theme.alpha[90]};
+  }
+`;
+
+const StyledIcon = styled(IoMdNotifications)`
+  fill: ${(p) => p.theme.color.gray[3]};
+`;
+
 const NotificationBell: FC = () => {
   return (
-    <div className={cx('wrapper')}>
-      <IoMdNotifications className={cx('icon')} size={27} />
+    <Wrapper>
+      <StyledIcon size={27} />
       <Ripple />
-    </div>
+    </Wrapper>
   );
 };
 

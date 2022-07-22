@@ -2,7 +2,7 @@ import type { FC, MouseEventHandler } from 'react';
 
 import { useState, useEffect, createRef } from 'react';
 import { useDebouncedRippleCleanUp } from '~/hooks';
-import classes from './Ripple.module.scss';
+import { RippleContainer, RippleEffect } from './Ripple.styled';
 
 interface RippleProps {
   duration?: number;
@@ -35,21 +35,12 @@ const Ripple: FC<RippleProps> = ({ duration = 500 }) => {
   }, [rippleRef]);
 
   return (
-    <div ref={rippleRef} className={classes.wrapper} onClick={handleAddRipple}>
+    <RippleContainer ref={rippleRef} onClick={handleAddRipple}>
       {rippleArray.length > 0 &&
-        rippleArray.map((ripple, index) => {
-          return (
-            <span
-              key={index}
-              style={{
-                top: ripple.y,
-                left: ripple.x,
-                animationDuration: duration + 'ms',
-              }}
-            />
-          );
-        })}
-    </div>
+        rippleArray.map((ripple, index) => (
+          <RippleEffect key={index} x={ripple.x} y={ripple.y} duration={duration} />
+        ))}
+    </RippleContainer>
   );
 };
 

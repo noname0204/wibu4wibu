@@ -8,7 +8,7 @@ import type {
 } from '@reduxjs/toolkit/query/react';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { logOut, setAccessToken } from '~/store/reducers/user';
-import { camelizeKeys } from 'humps';
+import camelize from 'camelize-ts';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_URL,
@@ -45,9 +45,7 @@ const baseQueryWithReAuth: BaseQueryFn<
       api.dispatch(logOut());
     } else if (refreshResult) {
       // Transform access token from snack_case to camelCase
-      const { accessToken } = camelizeKeys(
-        refreshResult as object
-      ) as RefreshTokenResponse;
+      const { accessToken } = camelize(refreshResult as RefreshTokenResponse);
 
       // Set new access token
       api.dispatch(setAccessToken(accessToken));
@@ -58,7 +56,7 @@ const baseQueryWithReAuth: BaseQueryFn<
   }
 
   // Transform response from snack_case to camelCase before return
-  result.data = camelizeKeys(result.data as object);
+  result.data = camelize(result.data);
   return result;
 };
 

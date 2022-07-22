@@ -18,8 +18,8 @@ const ActionMenu: FC<ActionMenuProps> = ({ open, onClickOutSide, children }) => 
         interactive
         placement='bottom-end'
         render={(attrs) => (
-          <FadeIn from='top' lenght={15} duration={0.2}>
-            <PopperWrapper width={190} {...attrs}>
+          <FadeIn from='top' lenght={15} duration={200}>
+            <PopperWrapper width='190px' {...attrs}>
               <PopperItemLink
                 to='/'
                 label='New content'

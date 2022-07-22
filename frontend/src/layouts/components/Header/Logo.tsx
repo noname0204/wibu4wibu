@@ -1,15 +1,26 @@
 import type { FC } from 'react';
-import classNames from 'classnames/bind';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import logoIcon from '~/assets/logo.png';
-import classes from './styles/Header.module.scss';
 
-const cx = classNames.bind(classes);
+const StyledLink = styled(Link)`
+  display: none;
+
+  @media ${(p) => p.theme.breakpoints.lg} {
+    display: block;
+  }
+`;
+
+const StyledImage = styled.img`
+  pointer-events: none;
+  user-select: none;
+`;
+
 const Logo: FC = () => {
   return (
-    <Link to='/' className={cx('logo-wrapper')}>
-      <img className={cx('logo')} src={logoIcon} alt='logo' />
-    </Link>
+    <StyledLink to='/'>
+      <StyledImage src={logoIcon} alt='logo' />
+    </StyledLink>
   );
 };
 

@@ -1,12 +1,42 @@
 import type { FC } from 'react';
-import classNames from 'classnames/bind';
+import styled, { css } from 'styled-components';
 import { useState } from 'react';
 import { Ripple } from '~/components/Animations';
 import ActionMenu from './ActionMenu';
 import { BsPlusLg } from 'react-icons/bs';
-import classes from './styles/ActionButton.module.scss';
 
-const cx = classNames.bind(classes);
+interface StyledProps {
+  isMenuOpen: boolean;
+}
+
+const StyledButton = styled.button<StyledProps>`
+  width: 50px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  background-color: ${(p) => p.theme.color.blue[5]};
+
+  ${(p) =>
+    !p.isMenuOpen &&
+    css`
+      &:hover > svg {
+        transform: scale(1.25);
+      }
+    `}
+`;
+
+const StyledIcon = styled(BsPlusLg)<StyledProps>`
+  transition: transform 200ms;
+  fill: white;
+
+  ${(p) =>
+    p.isMenuOpen &&
+    css`
+      transform: rotate(45deg) scale(1.25);
+    `}
+`;
+
 const ActionButton: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const handleHideMenu = () => setIsMenuOpen(false);
@@ -14,13 +44,13 @@ const ActionButton: FC = () => {
 
   return (
     <ActionMenu open={isMenuOpen} onClickOutSide={handleHideMenu}>
-      <button
+      <StyledButton
+        isMenuOpen={isMenuOpen}
         onClick={isMenuOpen ? handleHideMenu : handleShowMenu}
-        className={cx('button', !isMenuOpen && '[&>svg]:hover:scale-125')}
       >
-        <BsPlusLg size={15} className={cx('icon', isMenuOpen && 'rotate-45 scale-125')} />
+        <StyledIcon size={15} isMenuOpen={isMenuOpen} />
         <Ripple />
-      </button>
+      </StyledButton>
     </ActionMenu>
   );
 };

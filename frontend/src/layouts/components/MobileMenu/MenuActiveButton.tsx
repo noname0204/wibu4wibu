@@ -1,17 +1,39 @@
 import type { FC } from 'react';
-import classNames from 'classnames/bind';
+import styled from 'styled-components';
 import { IoMdMenu } from 'react-icons/io';
-import Button from '~/components/Button';
-import classes from './MobileMenu.module.scss';
 
-const cx = classNames.bind(classes);
+const ButtonWrapper = styled.div`
+  display: block;
+
+  @media ${(p) => p.theme.breakpoints.lg} {
+    display: none;
+  }
+`;
+
+const StyledButon = styled.button`
+  width: 50px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+
+  display: grid;
+  place-content: center;
+
+  &:hover {
+    background-color: ${(p) => p.theme.color.gray[1]};
+  }
+`;
+
+const StyledIcon = styled(IoMdMenu)`
+  fill: ${(p) => p.theme.color.gray[4]};
+`;
+
 const MobileMenuShowButton: FC = () => {
   return (
-    <div className={cx('show-btn-wrapper')}>
-      <Button styleLess className={cx('show-btn')}>
-        <IoMdMenu size={30} className='fill-gray-400' />
-      </Button>
-    </div>
+    <ButtonWrapper>
+      <StyledButon>
+        <StyledIcon size={30} />
+      </StyledButon>
+    </ButtonWrapper>
   );
 };
 

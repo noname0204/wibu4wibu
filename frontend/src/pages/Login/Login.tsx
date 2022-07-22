@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import type { LoginValidation } from '~/types/validations';
 import type { FetchingResponseError } from '~/types/api';
 
+import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { useSetDocumentTitle, useAppDispatch } from '~/hooks';
 import { useForm } from 'react-hook-form';
@@ -10,13 +11,16 @@ import { loginResolver } from '~/validations/auth';
 import { setUserAndAccessToken } from '~/store/reducers/user';
 
 import { FadeIn } from '~/components/Animations';
-import Form from '~/components/Form';
-import Paragraph from '~/components/Paragraph';
+import { Form, Paragraph } from '~/components/Styled';
 import Alert from '~/components/Alert';
 import Input from '~/components/Input';
 import Button from '~/components/Button';
 import Divider from '~/components/Divider';
 import { Link } from 'react-router-dom';
+
+const StyledButton = styled(Button)`
+  margin-top: 0.75rem;
+`;
 
 const Login: FC = () => {
   const {
@@ -48,7 +52,7 @@ const Login: FC = () => {
   return (
     <FadeIn from='bottom'>
       <Form width='27rem' onSubmit={handleLogin}>
-        <Paragraph fontStyle='semibold' color='#011d33' size={6}>
+        <Paragraph fontStyle='semibold' color='#011d33' size={2.2}>
           Login
         </Paragraph>
         {errorMessage && (
@@ -76,9 +80,9 @@ const Login: FC = () => {
           error={errors.password !== undefined}
           errorMessage={errors.password?.message}
         />
-        <Button className='mt-3' fullWidth disabled={isLoading}>
+        <StyledButton fullWidth disabled={isLoading}>
           Login
-        </Button>
+        </StyledButton>
         <Divider label='OR' />
         <Paragraph>
           Don't have an account? <Link to='/register'>Register</Link>
