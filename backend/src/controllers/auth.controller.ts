@@ -1,11 +1,11 @@
 import type { Handler } from 'express';
 import type { LoginValidation, RegisterValidation } from '~/types/validations';
 import type { TokenPayload } from '~/utils/jwt';
-import User from '~/models/user';
+import User from '~/models/user.model';
 import httpErrors from 'http-errors';
 import setCookie from '~/utils/cookie';
 import redis from '~/db/redis';
-import { registerValidation, loginValidation } from '~/validations/auth';
+import { registerValidation, loginValidation } from '~/validations/auth.validations';
 import { signAccessToken, signRefreshToken } from '~/utils/jwt';
 
 export const register: Handler = async (req, res, next) => {

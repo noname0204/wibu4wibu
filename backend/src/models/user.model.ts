@@ -3,6 +3,7 @@ import type { Model, CallbackError } from 'mongoose';
 import mongoose from 'mongoose';
 import mongodb from '~/db/mongodb';
 import bcrypt from 'bcryptjs';
+import hashPassword from '~/utils/hashPassword';
 
 interface InstanceMethods {
   isValidPassword: (password: string) => Promise<boolean>;
@@ -30,6 +31,7 @@ const schema = new mongoose.Schema<UserModel, Model<UserModel, {}, InstanceMetho
       type: String,
       minlenght: 3,
       required: true,
+      bcrypt: true,
     },
   },
   { versionKey: false }
@@ -38,8 +40,7 @@ const schema = new mongoose.Schema<UserModel, Model<UserModel, {}, InstanceMetho
 // Auto hash password before save to database
 schema.pre('save', async function (next) {
   try {
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(this.password, salt);
+    const hashedPassword = await hashPassword(this.password);
     this.password = hashedPassword;
     next();
   } catch (error) {
