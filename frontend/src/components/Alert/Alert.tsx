@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren } from 'react';
-import { Wrapper, Title, CloseIcon } from './Alert.styled';
+import { Wrapper, Title, StyledCloseIcon } from './Alert.styled';
 
 interface AlertProps extends PropsWithChildren {
   title: string;
@@ -18,7 +18,7 @@ const Alert: FC<AlertProps> = ({
   return (
     <Wrapper variant={variant} role='alert'>
       <Title variant={variant}>{title}</Title>
-      {close && <CloseIcon variant={variant} onClick={onClose} />}
+      {close && <StyledCloseIcon variant={variant} onClick={onClose} />}
       {children}
     </Wrapper>
   );

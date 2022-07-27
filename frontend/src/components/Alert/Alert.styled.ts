@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { IoIosClose } from 'react-icons/io';
+import { CloseIcon } from '~/components/Icons';
 
 interface VarientProps {
   variant: 'default' | 'success' | 'warn' | 'error';
@@ -72,7 +72,7 @@ export const Title = styled.p<VarientProps>`
   }}
 `;
 
-export const CloseIcon = styled(IoIosClose)<VarientProps>`
+export const StyledCloseIcon = styled(CloseIcon)<VarientProps>`
   position: absolute;
   right: 0.25rem;
   top: 0.25rem;

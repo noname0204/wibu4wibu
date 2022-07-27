@@ -5,8 +5,7 @@ import { logOut } from '~/store/reducers/user';
 import Tippy from '@tippyjs/react/headless';
 import { FadeIn } from '~/components/Animations';
 import { PopperItemLink, PopperWrapper } from '~/components/Popper';
-import { FaRegUserCircle } from 'react-icons/fa';
-import { MdLogout } from 'react-icons/md';
+import { UserCircleIcon, LogoutIcon } from '~/components/Icons';
 
 interface AvatarActionMenuProps {
   open: boolean;
@@ -38,13 +37,13 @@ const AvatarActionMenu: FC<AvatarActionMenuProps> = ({
             <PopperItemLink
               to='/profile'
               label='Profile'
-              icon={FaRegUserCircle}
+              icon={UserCircleIcon}
               onClick={onClickOutSide}
             />
             <PopperItemLink
               to='/'
               label='Logout'
-              icon={MdLogout}
+              icon={LogoutIcon}
               onClick={handleLogoutClick}
             />
           </PopperWrapper>

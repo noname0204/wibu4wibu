@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa';
+import { SearchIcon } from '~/components/Icons';
 
 const StyledLink = styled(Link)`
   display: flex;
@@ -25,7 +25,7 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const StyledIcon = styled(FaSearch)`
+const StyledIcon = styled(SearchIcon)`
   fill: ${(p) => p.theme.color.gray[3]};
 `;
 

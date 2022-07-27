@@ -2,9 +2,15 @@ import type { FC } from 'react';
 import styled from 'styled-components';
 import NavLink from './NavLink';
 import ActionButton from './ActionButton';
-import { AiFillHome, AiFillBook } from 'react-icons/ai';
-import { IoMdFilm } from 'react-icons/io';
-import { BsFillBookFill, BsMusicNote } from 'react-icons/bs';
+import {
+  HomeIcon,
+  BookIcon,
+  FilmIcon,
+  ShareIcon,
+  OpenBookIcon,
+  ChatIcon,
+  MusicNoteIcon,
+} from '~/components/Icons';
 
 const Wrapper = styled.div`
   display: none;
@@ -27,11 +33,13 @@ const Navbar: FC = () => {
   return (
     <Wrapper>
       <ActionButton />
-      <NavLink to='/' label='Home' icon={AiFillHome} />
-      <NavLink to='/' label='Anime' icon={IoMdFilm} />
-      <NavLink to='/' label='Manga' icon={BsFillBookFill} />
-      <NavLink to='/' label='Lightnovel' icon={AiFillBook} />
-      <NavLink to='/' label='Chill Radio' icon={BsMusicNote} />
+      <NavLink to='/' label='Home' icon={HomeIcon} />
+      <NavLink to='/' label='Anime' icon={FilmIcon} />
+      <NavLink to='/' label='Manga' icon={OpenBookIcon} />
+      <NavLink to='/' label='Lightnovel' icon={BookIcon} />
+      <NavLink to='/' label='Chat' icon={ChatIcon} />
+      <NavLink to='/' label='Chill Radio' icon={MusicNoteIcon} />
+      <NavLink to='/' label='Community' icon={ShareIcon} />
     </Wrapper>
   );
 };

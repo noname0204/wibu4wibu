@@ -1,6 +1,6 @@
 import type { FC, MouseEventHandler } from 'react';
 import type { IconType } from 'react-icons';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 interface ItemProps {
@@ -29,13 +29,11 @@ const StyledLabel = styled.span`
 `;
 
 const ItemLink: FC<ItemProps> = ({ to, label, icon: Icon, onClick }) => {
-  const StyledIcon = styled(Icon)`
-    fill: ${(p) => p.theme.color.gray[7]};
-  `;
+  const theme = useTheme();
 
   return (
     <StyledLink to={to} onClick={onClick}>
-      <StyledIcon />
+      <Icon fill={theme.color.gray[7]} />
       <StyledLabel>{label}</StyledLabel>
     </StyledLink>
   );

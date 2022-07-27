@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import styled from 'styled-components';
-import { IoMdMenu } from 'react-icons/io';
+import { MenuIcon } from '~/components/Icons';
 
 const ButtonWrapper = styled.div`
   display: block;
@@ -23,7 +23,7 @@ const StyledButon = styled.button`
   }
 `;
 
-const StyledIcon = styled(IoMdMenu)`
+const StyledIcon = styled(MenuIcon)`
   fill: ${(p) => p.theme.color.gray[4]};
 `;
 

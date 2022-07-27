@@ -2,8 +2,7 @@ import type { FC, ReactElement } from 'react';
 import Tippy from '@tippyjs/react/headless';
 import { FadeIn } from '~/components/Animations';
 import { PopperItemLink, PopperWrapper } from '~/components/Popper';
-import { FaPen } from 'react-icons/fa';
-import { BsMusicNoteBeamed } from 'react-icons/bs';
+import { MusicNoteBeamedIcon, PenIcon, PostAddIcon } from '~/components/Icons';
 
 interface ActionMenuProps {
   open: boolean;
@@ -23,13 +22,19 @@ const ActionMenu: FC<ActionMenuProps> = ({ open, onClickOutSide, children }) => 
               <PopperItemLink
                 to='/'
                 label='New content'
-                icon={FaPen}
+                icon={PenIcon}
+                onClick={onClickOutSide}
+              />
+              <PopperItemLink
+                to='/'
+                label='New post'
+                icon={PostAddIcon}
                 onClick={onClickOutSide}
               />
               <PopperItemLink
                 to='/'
                 label='New chill radio'
-                icon={BsMusicNoteBeamed}
+                icon={MusicNoteBeamedIcon}
                 onClick={onClickOutSide}
               />
             </PopperWrapper>

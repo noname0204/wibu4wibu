@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import styled from 'styled-components';
-import { IoMdNotifications } from 'react-icons/io';
+import { NotificationsIcon } from '~/components/Icons';
 import { Ripple } from '~/components/Animations';
 
 const Wrapper = styled.div`
@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const StyledIcon = styled(IoMdNotifications)`
+const StyledIcon = styled(NotificationsIcon)`
   fill: ${(p) => p.theme.color.gray[3]};
 `;
 

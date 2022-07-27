@@ -1,8 +1,7 @@
 import type { FC, ChangeEventHandler } from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { BiSearchAlt2 } from 'react-icons/bi';
-import { MdCancel } from 'react-icons/md';
+import { SearchThinIcon, CancelIcon } from '~/components/Icons';
 
 const Wrapper = styled.div`
   --search-items-margin: 0.7rem;
@@ -40,7 +39,7 @@ const StyledInput = styled.input`
   color: ${(p) => p.theme.color.gray[6]};
 `;
 
-const StyledClearButton = styled(MdCancel)`
+const StyledClearButton = styled(CancelIcon)`
   cursor: pointer;
   fill: ${(p) => p.theme.color.gray[4]};
 
@@ -49,10 +48,13 @@ const StyledClearButton = styled(MdCancel)`
   }
 `;
 
-const StyledSearchIcon = styled(BiSearchAlt2)<{ isInputValueEmpty: boolean }>`
+const StyledSearchIcon = styled(SearchThinIcon)<{
+  // Use transient props to fix error with react dom
+  $isInputValueEmpty: boolean;
+}>`
   width: 1.5rem;
   transition: fill 200ms;
-  fill: ${(p) => (p.isInputValueEmpty ? p.theme.color.gray[4] : p.theme.color.slate[6])};
+  fill: ${(p) => (p.$isInputValueEmpty ? p.theme.color.gray[4] : p.theme.color.slate[6])};
 
   &:hover {
     fill: ${(p) => p.theme.color.slate[6]};
@@ -78,7 +80,7 @@ const Search: FC = () => {
         placeholder='Search anime, manga, lightnovel, ...'
         spellCheck={false}
       />
-      <StyledSearchIcon size={20} isInputValueEmpty={!value} />
+      <StyledSearchIcon size={20} $isInputValueEmpty={!value} />
     </Wrapper>
   );
 };

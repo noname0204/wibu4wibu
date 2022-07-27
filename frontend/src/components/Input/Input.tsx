@@ -8,7 +8,7 @@ import {
   IconWrapper,
   ErrorLabel,
 } from './Input.styled';
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { OpenEyeIcon, CloseEyeIcon } from '~/components/Icons';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   fullWidth?: boolean;
@@ -21,7 +21,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ fullWidth = false, label, error, errorMessage, type, ...inputProps }, ref) => {
     const id = useId();
     const [visible, setVisible] = useState<boolean>(type !== 'password');
-    const EyeIcon = useMemo(() => (visible ? AiFillEyeInvisible : AiFillEye), [visible]);
+    const EyeIcon = useMemo(() => (visible ? OpenEyeIcon : CloseEyeIcon), [visible]);
 
     const handleEyeClick = () => {
       setVisible(!visible);
